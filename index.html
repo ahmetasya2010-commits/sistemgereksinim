@@ -10,12 +10,13 @@
 
     <style>
         :root {
-            --bg-color: #0b0e14;
-            --card-bg: #131822;
+            --bg-color: #030508;
+            --card-bg: #0d121f;
             --accent-color: #00ff66;
+            --accent-glow: rgba(0, 255, 102, 0.35);
             --text-main: #ffffff;
             --text-muted: #8b9bb4;
-            --border-color: #1f293d;
+            --border-color: #1a2744;
         }
 
         body {
@@ -24,7 +25,15 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            background-image: radial-gradient(circle at 50% 0%, #1a2639 0%, var(--bg-color) 70%);
+            /* Ultra oyun temalı, neon RGB ışık sızıntıları ve teknik grid arka plan */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 102, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 150, 255, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(120, 0, 255, 0.08) 0%, transparent 60%),
+                linear-gradient(to right, rgba(26, 39, 68, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(26, 39, 68, 0.2) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+            background-attachment: fixed;
             min-height: 100vh;
             scroll-behavior: smooth;
         }
@@ -32,12 +41,12 @@
         nav {
             position: sticky;
             top: 0;
-            background: rgba(19, 24, 34, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 5, 8, 0.9);
+            backdrop-filter: blur(15px);
             padding: 15px 20px;
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
         }
@@ -45,31 +54,34 @@
         nav a {
             color: var(--text-muted);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.95rem;
-            transition: color 0.2s;
+            letter-spacing: 0.5px;
+            transition: color 0.2s, text-shadow 0.2s;
         }
 
         nav a:hover {
             color: var(--accent-color);
+            text-shadow: 0 0 12px var(--accent-glow);
         }
 
         header {
-            padding: 40px 20px 20px 20px;
+            padding: 50px 20px 20px 20px;
             text-align: center;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin: 0;
             color: var(--text-main);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px var(--accent-glow);
         }
 
         h1 span {
             color: var(--accent-color);
+            text-shadow: 0 0 25px rgba(0, 255, 102, 0.6);
         }
 
         p.subtitle {
@@ -87,20 +99,20 @@
         #searchBox {
             width: 100%;
             max-width: 600px;
-            padding: 15px 20px;
+            padding: 16px 22px;
             font-size: 16px;
-            border-radius: 12px;
+            border-radius: 10px;
             border: 2px solid var(--border-color);
             background-color: var(--card-bg);
             color: white;
             outline: none;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
         }
 
         #searchBox:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+            box-shadow: 0 0 25px var(--accent-glow);
         }
 
         #gameContainer {
@@ -117,8 +129,8 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -129,29 +141,21 @@
         .game-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-color);
+            box-shadow: 0 12px 30px rgba(0, 255, 102, 0.2);
         }
 
         .game-header {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column;
+            gap: 8px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 12px;
             margin-bottom: 12px;
         }
 
-        .game-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-            background-color: #0b0e14;
-        }
-
         .game-card h3 {
             margin: 0;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-main);
             line-height: 1.3;
         }
@@ -168,14 +172,15 @@
 
         .badge {
             display: inline-block;
-            background-color: rgba(0, 255, 102, 0.1);
+            background-color: rgba(0, 255, 102, 0.12);
             color: var(--accent-color);
-            padding: 2px 6px;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            padding: 3px 8px;
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 4px;
+            align-self: flex-start;
         }
 
         .info-section {
@@ -185,6 +190,7 @@
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
         }
 
         .info-section h2 {
@@ -192,6 +198,7 @@
             margin-top: 0;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 10px;
+            text-shadow: 0 0 12px var(--accent-glow);
         }
 
         .info-section p {
@@ -206,6 +213,7 @@
             font-size: 0.9rem;
             border-top: 1px solid var(--border-color);
             margin-top: 50px;
+            background: rgba(3, 5, 8, 0.7);
         }
     </style>
 </head>
@@ -252,305 +260,304 @@
     </footer>
 
     <script>
-        // 300+ oyunun AppID / Kapak görselleri ve sistem gereksinimleri veritabanı
         const gamesDatabase = {
-            "Minecraft": { appid: "minecraft", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co49xa.png", os: "Windows 10/11", cpu: "Intel Core i3-3210 / AMD A8-7600", gpu: "Intel HD Graphics 4000 / AMD Radeon R5", ram: "4 GB RAM" },
-            "Counter-Strike 2": { appid: "730", os: "Windows 10 (64-bit)", cpu: "4 İş Parçacıklı CPU (Intel / AMD)", gpu: "1 GB veya daha fazla, DX11 uyumlu", ram: "8 GB RAM" },
-            "Grand Theft Auto V": { appid: "271590", os: "Windows 10 64-bit", cpu: "Intel Core 2 Quad Q6600 / AMD Phenom 9850", gpu: "NVIDIA 9800 GT 1GB / AMD HD 4870", ram: "4 GB RAM" },
-            "Grand Theft Auto IV": { appid: "12210", os: "Windows 10 / 11", cpu: "Intel Core 2 Duo 1.8 GHz / AMD Athlon X2 64", gpu: "NVIDIA 7900 / AMD X1900 256MB", ram: "2 GB RAM" },
-            "Red Dead Redemption 2": { appid: "1174180", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GTX 770 / AMD Radeon R9 280", ram: "8 GB RAM" },
-            "The Witcher 3: Wild Hunt": { appid: "292030", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-2500K / AMD Phenom II X4", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7870", ram: "6 GB RAM" },
-            "Cyberpunk 2077": { appid: "1091500", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 6GB / AMD RX 580", ram: "12 GB RAM" },
-            "Elden Ring": { appid: "1245620", os: "Windows 10/11", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GTX 1060 3GB / AMD RX 580", ram: "12 GB RAM" },
-            "Baldur's Gate 3": { appid: "1086940", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690 / AMD FX 8350", gpu: "NVIDIA GTX 970 / AMD RX 480", ram: "8 GB RAM" },
-            "Hogwarts Legacy": { appid: "990080", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 960 4GB / AMD RX 470", ram: "16 GB RAM" },
-            "Fortnite": { appid: "fortnite", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2ebq.png", os: "Windows 10/11 (64-bit)", cpu: "Core i3-3225 3.3 GHz", gpu: "Intel HD 4000 / AMD Radeon Vega 8", ram: "8 GB RAM" },
-            "League of Legends": { appid: "lol", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mvt.png", os: "Windows 10/11", cpu: "Intel Core i3-530 / AMD A8-3870", gpu: "NVIDIA GT 9600 / AMD HD 6570", ram: "2 GB RAM" },
-            "Valorant": { appid: "valorant", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2uqi.png", os: "Windows 7/8/10/11 (64-bit)", cpu: "Intel Core i3-4150 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GT 730 / AMD Radeon R7 240", ram: "4 GB RAM" },
-            "Dota 2": { appid: "570", os: "Windows 10/11", cpu: "Dual Core 2.8 GHz", gpu: "NVIDIA GeForce 8600/9600GT / ATI HD2600", ram: "4 GB RAM" },
-            "PUBG: Battlegrounds": { appid: "578080", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4430 / AMD FX-6300", gpu: "NVIDIA GTX 960 2GB / AMD R7 370", ram: "8 GB RAM" },
-            "Apex Legends": { appid: "1172470", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-6300 / AMD FX-4350", gpu: "NVIDIA GT 640 / AMD HD 7730", ram: "6 GB RAM" },
-            "Overwatch 2": { appid: "overwatch2", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5xqe.png", os: "Windows 10/11", cpu: "Intel Core i3 / AMD Phenom X3 8650", gpu: "NVIDIA GTX 600 / AMD HD 7000", ram: "6 GB RAM" },
-            "Rainbow Six Siege": { appid: "359550", os: "Windows 10/11", cpu: "Intel Core i3-560 / AMD FX-4100", gpu: "NVIDIA GTX 460 / AMD HD 7970", ram: "6 GB RAM" },
-            "Call of Duty: Warzone": { appid: "cod_warzone", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2ltt.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4340 / AMD FX-6300", gpu: "NVIDIA GTX 670 / AMD HD 7950", ram: "8 GB RAM" },
-            "Call of Duty: Modern Warfare III": { appid: "2000950", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 960 / AMD RX 470", ram: "8 GB RAM" },
-            "Call of Duty: Black Ops 6": { appid: "cod_bo6", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co7v7v.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 960 / AMD RX 470", ram: "12 GB RAM" },
-            "Battlefield 1": { appid: "1238840", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD FX-6350", gpu: "NVIDIA GTX 660 / AMD HD 7850", ram: "8 GB RAM" },
-            "Battlefield V": { appid: "1238810", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-8300H / AMD FX-8350", gpu: "NVIDIA GTX 1050 / AMD RX 560", ram: "8 GB RAM" },
-            "Battlefield 2042": { appid: "1517290", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1050 Ti / AMD RX 560", ram: "8 GB RAM" },
-            "Terraria": { appid: "105600", os: "Windows 10/11", cpu: "2.0 GHz", gpu: "128MB Video Memory", ram: "2.5 GB RAM" },
-            "Stardew Valley": { appid: "413150", os: "Windows 10", cpu: "2 GHz", gpu: "256 mb video memory", ram: "2 GB RAM" },
-            "Roblox": { appid: "roblox", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1x7z.png", os: "Windows 10/11", cpu: "Intel Core i3 / AMD Ryzen 3", gpu: "DirectX 10 compatible", ram: "4 GB RAM" },
-            "Among Us": { appid: "945360", os: "Windows 10", cpu: "SSE2 instruction set support", gpu: "Intel HD 4000", ram: "1 GB RAM" },
-            "Fall Guys": { appid: "fallguys", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2w20.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i5 / AMD equivalent", gpu: "NVIDIA GTX 660 / AMD HD 7950", ram: "8 GB RAM" },
-            "Rocket League": { appid: "rocketleague", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xod.png", os: "Windows 10 (64-bit)", cpu: "2.5 GHz Dual Core", gpu: "NVIDIA GTX 760 / AMD R9 270X", ram: "4 GB RAM" },
-            "Euro Truck Simulator 2": { appid: "227300", os: "Windows 7/8/10/11", cpu: "Quad core CPU 2.4 GHz", gpu: "GTS 450-class / Intel HD 4000", ram: "4 GB RAM" },
-            "American Truck Simulator": { appid: "270880", os: "Windows 7/8/10/11", cpu: "Quad core CPU 2.4 GHz", gpu: "GTS 450-class / Intel HD 4000", ram: "4 GB RAM" },
-            "The Sims 4": { appid: "sims4", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tnm.png", os: "Windows 10/11", cpu: "1.8 GHz Intel Core 2 Duo", gpu: "128 MB Video RAM (NVIDIA GeForce 6600)", ram: "4 GB RAM" },
-            "Cities: Skylines": { appid: "255710", os: "Windows 10 (64-bit)", cpu: "Intel Core 2 Duo, 3.0GHz", gpu: "NVIDIA GeForce GTX 260", ram: "4 GB RAM" },
-            "Cities: Skylines II": { appid: "949230", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700K / AMD Ryzen 5 2600X", gpu: "NVIDIA GTX 970 / AMD RX 480", ram: "8 GB RAM" },
-            "Civilization VI": { appid: "289070", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i3 2.5 Ghz / AMD Phenom II", gpu: "NVIDIA GeForce 450 / AMD Radeon 5570", ram: "4 GB RAM" },
-            "Age of Empires II: Definitive Edition": { appid: "813780", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100 / AMD FX-4100", gpu: "NVIDIA GT 420 / AMD Radeon HD 5570", ram: "4 GB RAM" },
-            "Age of Empires IV": { appid: "1466860", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-6300U / AMD Ryzen 5 2400G", gpu: "Intel HD 520 / AMD Radeon RX Vega 11", ram: "8 GB RAM" },
-            "Crusader Kings III": { appid: "1158310", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2120 / AMD FX-6350", gpu: "NVIDIA GTX 460 / AMD Radeon HD 6850", ram: "6 GB RAM" },
-            "Europa Universalis IV": { appid: "236850", os: "Windows 10", cpu: "Intel Pentium IV 2.4 GHz", gpu: "NVIDIA GeForce 8800", ram: "2 GB RAM" },
-            "Hearts of Iron IV": { appid: "394360", os: "Windows 10", cpu: "Intel Core 2 Quad Q9400 2.66 GHz", gpu: "NVIDIA GeForce GTX 570", ram: "4 GB RAM" },
-            "Total War: Warhammer III": { appid: "1142710", os: "Windows 10 (64-bit)", cpu: "Intel i3-4130 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 900 / AMD RX 400", ram: "6 GB RAM" },
-            "Total War: Rome II": { appid: "214950", os: "Windows 10", cpu: "2 GHz Intel Dual Core", gpu: "512 MB DirectX 9.0c compatible", ram: "2 GB RAM" },
-            "Mount & Blade II: Bannerlord": { appid: "261550", os: "Windows 10 (64-bit)", cpu: "Intel i3-8100 / AMD Ryzen 3 1300X", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "6 GB RAM" },
-            "Mount & Blade: Warband": { appid: "48700", os: "Windows 10", cpu: "2.1 GHz", gpu: "Graphics card with 128 MB", ram: "1 GB RAM" },
-            "RimWorld": { appid: "294100", os: "Windows 10", cpu: "Core 2 Duo", gpu: "Intel HD Graphics 3000", ram: "4 GB RAM" },
-            "Factorio": { appid: "427520", os: "Windows 10/11", cpu: "Dual core 3Ghz+", gpu: "DirectX 10.1 capable", ram: "4 GB RAM" },
-            "Satisfactory": { appid: "526870", os: "Windows 10/11 (64-bit)", cpu: "i5-3570 3.4 GHz", gpu: "NVIDIA GTX 770 2GB", ram: "8 GB RAM" },
-            "Valheim": { appid: "892970", os: "Windows 10 (64-bit)", cpu: "2.6 GHz Dual Core", gpu: "GeForce GTX 950 / Radeon HD 7970", ram: "8 GB RAM" },
-            "Rust": { appid: "252490", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-3750 / AMD FX-8350", gpu: "NVIDIA GTX 970 / AMD R9 380", ram: "10 GB RAM" },
-            "DayZ": { appid: "221100", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4430", gpu: "NVIDIA GeForce GTX 760 / AMD R9 270X", ram: "8 GB RAM" },
-            "ARK: Survival Evolved": { appid: "346110", os: "Windows 10", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 670 / AMD Radeon HD 7870", ram: "8 GB RAM" },
-            "ARK: Survival Ascended": { appid: "2399830", os: "Windows 10/11", cpu: "AMD Ryzen 5 2600X / Intel i7-6800K", gpu: "NVIDIA GTX 1080 / AMD RX 5600 XT", ram: "16 GB RAM" },
-            "Palworld": { appid: "1623730", os: "Windows 10 (64-bit)", cpu: "i5-3570K 3.4 GHz", gpu: "GeForce GTX 1050", ram: "16 GB RAM" },
-            "Sons of the Forest": { appid: "1326470", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GeForce GTX 1060 3GB / AMD Radeon RX 570", ram: "16 GB RAM" },
-            "The Forest": { appid: "242760", os: "Windows 10", cpu: "Intel Dual Core 2.4 GHz", gpu: "NVIDIA GeForce 8800GT", ram: "4 GB RAM" },
-            "Subnautica": { appid: "264710", os: "Windows 10 (64-bit)", cpu: "Intel Haswell 2 cores / 4 threads", gpu: "Intel HD 4600", ram: "8 GB RAM" },
-            "Subnautica: Below Zero": { appid: "848450", os: "Windows 10 (64-bit)", cpu: "Intel Core i3 / AMD Ryzen 3", gpu: "Intel HD 530", ram: "8 GB RAM" },
-            "Don't Starve": { appid: "219740", os: "Windows 10", cpu: "1.7 GHz+", gpu: "Radeon HD 5450 / 256MB", ram: "1 GB RAM" },
-            "Don't Starve Together": { appid: "322330", os: "Windows 10", cpu: "1.7 GHz+", gpu: "Radeon HD 5450", ram: "1 GB RAM" },
-            "Project Zomboid": { appid: "108600", os: "Windows 10/11", cpu: "2.0 GHz Processor", gpu: "OpenGL 2.1 compatible", ram: "8 GB RAM" },
-            "7 Days to Die": { appid: "251570", os: "Windows 10 (64-bit)", cpu: "2.4 GHz Quad Core", gpu: "2 GB dedicated VRAM", ram: "8 GB RAM" },
-            "Raft": { appid: "648800", os: "Windows 10 (64-bit)", cpu: "2.6 GHz Dual Core", gpu: "GeForce GTX 500 series", ram: "6 GB RAM" },
-            "Green Hell": { appid: "815370", os: "Windows 10 (64-bit)", cpu: "3.2 GHz Dual Core", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7870", ram: "8 GB RAM" },
-            "Grounded": { appid: "962130", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3225", gpu: "NVIDIA GTX 650 Ti", ram: "4 GB RAM" },
-            "Enshrouded": { appid: "1203620", os: "Windows 10", cpu: "Intel Core i5-6400 / AMD Ryzen 5 1500X", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
-            "V Rising": { appid: "1604030", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1500X", gpu: "NVIDIA GeForce GTX 750 Ti", ram: "8 GB RAM" },
-            "Conan Exiles": { appid: "440900", os: "Windows 10 (64-bit)", cpu: "Intel Quad Core i5-2300 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 560 / AMD Radeon HD 7770", ram: "6 GB RAM" },
-            "No Man's Sky": { appid: "275850", os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GTX 1060 / AMD RX 470", ram: "8 GB RAM" },
-            "Starbound": { appid: "211820", os: "Windows 10", cpu: "Core 2 Duo", gpu: "Capable of supporting OpenGL 2.1+", ram: "2 GB RAM" },
-            "Hades": { appid: "1145360", os: "Windows 10", cpu: "Dual Core 2.4 GHz", gpu: "1GB VRAM / DirectX 10+", ram: "4 GB RAM" },
-            "Hades II": { appid: "1145350", os: "Windows 10 (64-bit)", cpu: "Dual Core 2.4 GHz", gpu: "2GB VRAM", ram: "8 GB RAM" },
-            "Hollow Knight": { appid: "367520", os: "Windows 10", cpu: "Intel Core 2 Duo E6750", gpu: "NVIDIA GeForce GT 320", ram: "4 GB RAM" },
-            "Hollow Knight: Silksong": { appid: "1030300", os: "Windows 10", cpu: "Dual Core 2.4 GHz", gpu: "DirectX 10 or 11 compatible", ram: "4 GB RAM" },
-            "Dead Cells": { appid: "588650", os: "Windows 10", cpu: "Intel Core i5+", gpu: "Nvidia 450 GTS / Radeon HD 5750", ram: "2 GB RAM" },
-            "Cuphead": { appid: "268910", os: "Windows 7/10", cpu: "Intel Core2 Duo E8400, 3.0GHz", gpu: "GeForce 9600 GT / AMD HD 3870", ram: "3 GB RAM" },
-            "Celeste": { appid: "504230", os: "Windows 10", cpu: "Intel Core i3M", gpu: "Intel HD 4000", ram: "2 GB RAM" },
-            "Ori and the Blind Forest": { appid: "261570", os: "Windows 10", cpu: "Intel Core 2 Duo", gpu: "Nvidia GeForce 9600 GT", ram: "4 GB RAM" },
-            "Ori and the Will of the Wisps": { appid: "1057090", os: "Windows 10", cpu: "AMD FX-6300 / Intel Core i3-3220", gpu: "AMD Radeon R7 260 / NVIDIA GeForce GTX 950", ram: "8 GB RAM" },
-            "Undertale": { appid: "391540", os: "Windows 10", cpu: "2+ GHz", gpu: "512MB", ram: "2 GB RAM" },
-            "Deltarune": { appid: "deltarune", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xoz.png", os: "Windows 10", cpu: "2+ GHz", gpu: "512MB", ram: "2 GB RAM" },
-            "Risk of Rain 2": { appid: "632360", os: "Windows 10 (64-bit)", cpu: "1.4 GHz Dual Core", gpu: "NVIDIA GeForce GTX 760", ram: "4 GB RAM" },
-            "Vampire Survivors": { appid: "1794680", os: "Windows 10", cpu: "Intel Pentium Dual Core", gpu: "1GB VRAM", ram: "1 GB RAM" },
-            "Balatro": { appid: "2379780", os: "Windows 10", cpu: "1.0 GHz", gpu: "OpenGL 2.1 compatible", ram: "1 GB RAM" },
-            "Slay the Spire": { appid: "646570", os: "Windows 10", cpu: "2.0 GHz", gpu: "1Gb Video Memory", ram: "2 GB RAM" },
-            "The Binding of Isaac: Rebirth": { appid: "250900", os: "Windows 10", cpu: "2.6 GHz", gpu: "DirectX 9 compatible", ram: "2 GB RAM" },
-            "Enter the Gungeon": { appid: "311690", os: "Windows 10", cpu: "Intel Core 2 Duo", gpu: "DirectX 9 compatible", ram: "2 GB RAM" },
-            "Brotato": { appid: "1942280", os: "Windows 10", cpu: "2 GHz", gpu: "1 GB VRAM", ram: "2 GB RAM" },
-            "Dave the Diver": { appid: "1868140", os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce GTX 750", ram: "8 GB RAM" },
-            "Disco Elysium": { appid: "632470", os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce 660", ram: "4 GB RAM" },
-            "Divinity: Original Sin 2": { appid: "435150", os: "Windows 10 (64-bit)", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 550", ram: "4 GB RAM" },
-            "The Elder Scrolls V: Skyrim": { appid: "489830", os: "Windows 10/11", cpu: "Quad-core Intel/AMD processor", gpu: "NVIDIA GTX 470 / AMD HD 7870", ram: "8 GB RAM" },
-            "The Elder Scrolls IV: Oblivion": { appid: "900883", os: "Windows 10", cpu: "3.0 GHz Intel Pentium 4", gpu: "ATI X800 series / NVIDIA GeForce 6800", ram: "1 GB RAM" },
-            "Fallout 4": { appid: "377160", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2300 2.8 GHz / AMD Phenom II X4 945", gpu: "NVIDIA GTX 550 Ti 2GB / AMD Radeon HD 7870 2GB", ram: "8 GB RAM" },
-            "Fallout: New Vegas": { appid: "22380", os: "Windows 10", cpu: "2.5 GHz Intel Pentium Dual-Core", gpu: "NVIDIA GeForce 6800 / ATI Radeon X1300", ram: "2 GB RAM" },
-            "Fallout 3": { appid: "22300", os: "Windows 10", cpu: "2.4 GHz Intel Pentium 4", gpu: "NVIDIA 6800 / ATI X850", ram: "1 GB RAM" },
-            "Starfield": { appid: "1716740", os: "Windows 10/11", cpu: "AMD Ryzen 5 2600X / Intel Core i7-6800K", gpu: "AMD Radeon RX 5700 / NVIDIA GeForce GTX 1070", ram: "16 GB RAM" },
-            "Dragon Age: Inquisition": { appid: "1222690", os: "Windows 10 (64-bit)", cpu: "Intel Quad Core 2.0 GHz / AMD Quad Core 2.5 GHz", gpu: "NVIDIA GeForce GTX 480 / AMD Radeon HD 5870", ram: "4 GB RAM" },
-            "Dragon Age: The Veilguard": { appid: "1845910", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GTX 970 / AMD RX 570", ram: "16 GB RAM" },
-            "Mass Effect Legendary Edition": { appid: "1328670", os: "Windows 10 (64-bit)", cpu: "Intel Core i5 3570 / AMD FX-8350", gpu: "GPU 2GB (GTX 760 / Radeon 7970)", ram: "8 GB RAM" },
-            "Mass Effect 2": { appid: "24980", os: "Windows 10", cpu: "1.8 GHz Intel Core 2 Duo", gpu: "256 MB (NVIDIA GeForce 6800 / ATI Radeon X1600)", ram: "1 GB RAM" },
-            "Mass Effect 3": { appid: "1238020", os: "Windows 10", cpu: "1.8 GHz Intel Core 2 Duo", gpu: "256 MB (NVIDIA 7900 GT / ATI X1900)", ram: "2 GB RAM" },
-            "Dragon's Dogma 2": { appid: "2054970", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5 10600 / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1070 / AMD Radeon RX 5500 XT", ram: "16 GB RAM" },
-            "Dragon's Dogma: Dark Arisen": { appid: "367500", os: "Windows 10", cpu: "Intel Core i5 660 CPU", gpu: "NVIDIA GeForce GTX 470", ram: "4 GB RAM" },
-            "Monster Hunter: World": { appid: "582010", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 3.20GHz / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
-            "Monster Hunter Rise": { appid: "1446780", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4130 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GT 1030 / AMD Radeon RX 550", ram: "8 GB RAM" },
-            "Dark Souls": { appid: "211420", os: "Windows 10", cpu: "Intel Core 2 Duo 2.6 GHz", gpu: "ATI Radeon 4850 / NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
-            "Dark Souls II": { appid: "236430", os: "Windows 10", cpu: "Intel Core 2 Duo 8500 3.1 GHz", gpu: "NVIDIA GeForce 9600 GT / ATI Radeon HD 5870", ram: "2 GB RAM" },
-            "Dark Souls III": { appid: "374320", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 750 Ti / AMD Radeon HD 7950", ram: "4 GB RAM" },
-            "Sekiro: Shadows Die Twice": { appid: "814380", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon HD 7950", ram: "4 GB RAM" },
-            "Lies of P": { appid: "1627720", os: "Windows 10 (64-bit)", cpu: "AMD Ryzen 3 1200 / Intel Core i3-6300", gpu: "AMD Radeon RX 560 / NVIDIA GeForce GTX 960", ram: "8 GB RAM" },
-            "Nioh": { appid: "485510", os: "Windows 10 (64-bit)", cpu: "Intel Core i5 3550", gpu: "NVIDIA GeForce GTX 780", ram: "6 GB RAM" },
-            "Nioh 2": { appid: "1325200", os: "Windows 10 (64-bit)", cpu: "Intel Core i5 4460", gpu: "NVIDIA GeForce GTX 970", ram: "6 GB RAM" },
-            "Black Myth: Wukong": { appid: "2358720", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
-            "Devil May Cry 5": { appid: "601150", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
-            "Resident Evil 2": { appid: "883710", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
-            "Resident Evil 3": { appid: "952060", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
-            "Resident Evil 4": { appid: "2050650", os: "Windows 10/11 (64-bit)", cpu: "AMD Ryzen 3 1200 / Intel Core i5-7500", gpu: "AMD Radeon RX 560 / NVIDIA GeForce GTX 1050 Ti", ram: "8 GB RAM" },
-            "Resident Evil 7: Biohazard": { appid: "418370", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
-            "Resident Evil Village": { appid: "1196590", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-7500 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 560", ram: "8 GB RAM" },
-            "Resident Evil 5": { appid: "21690", os: "Windows 10", cpu: "Intel Core 2 Quad / AMD Phenom II X4", gpu: "NVIDIA GeForce 9800 / ATI Radeon HD 5570", ram: "4 GB RAM" },
-            "Resident Evil 6": { appid: "221040", os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA GeForce 8800 GTS", ram: "2 GB RAM" },
-            "Dead Space": { appid: "17470", os: "Windows 10", cpu: "2.8 GHz processor", gpu: "NVIDIA GeForce 6800 / ATI Radeon X1600", ram: "1 GB RAM" },
-            "Dead Space 2": { appid: "47780", os: "Windows 10", cpu: "2.8 GHz processor", gpu: "NVIDIA GeForce 6800 / ATI Radeon X1600", ram: "1 GB RAM" },
-            "Dead Space (2023)": { appid: "1693980", os: "Windows 10 (64-bit)", cpu: "Ryzen 5 2600X / Core i5 8600", gpu: "RX 5700 / GTX 1070", ram: "16 GB RAM" },
-            "Silent Hill 2": { appid: "2124490", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700K / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1080 / AMD Radeon RX 5700 XT", ram: "16 GB RAM" },
-            "Alan Wake": { appid: "108710", os: "Windows 10", cpu: "Intel Core 2 Duo 2 GHz", gpu: "DirectX 9 compatible with 512MB RAM", ram: "2 GB RAM" },
-            "Alan Wake 2": { appid: "alanwake2", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6q55.png", os: "Windows 10/11 (64-bit)", cpu: "Intel i5-7600K / AMD equivalent", gpu: "GeForce RTX 2060 / Radeon RX 6600", ram: "16 GB RAM" },
-            "Control": { appid: "870780", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690 / AMD FX 4350", gpu: "NVIDIA GeForce GTX 780 / AMD Radeon R9 280X", ram: "8 GB RAM" },
-            "Quantum Break": { appid: "474960", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 2.70GHz", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
-            "The Last of Us Part I": { appid: "1888930", os: "Windows 10 (64-bit)", cpu: "AMD Ryzen 5 1500X / Intel Core i7-4770K", gpu: "AMD Radeon RX 470 / NVIDIA GeForce GTX 970", ram: "16 GB RAM" },
-            "The Last of Us Part II Remastered": { appid: "tlou2", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6w1d.png", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
-            "God of War": { appid: "1593500", os: "Windows 10 (64-bit)", cpu: "Intel i5-2500k / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 960 / AMD R9 290X", ram: "8 GB RAM" },
-            "God of War Ragnarök": { appid: "2322010", os: "Windows 10 (64-bit)", cpu: "Intel i5-4670K / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 1060 / AMD RX 5500 XT", ram: "8 GB RAM" },
-            "Horizon Zero Dawn": { appid: "1151640", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "Nvidia GeForce GTX 780 / AMD Radeon R9 290", ram: "8 GB RAM" },
-            "Horizon Forbidden West": { appid: "2420110", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-8100 / AMD Ryzen 3 1300X", gpu: "NVIDIA GeForce GTX 1650 / AMD Radeon RX 5500 XT", ram: "16 GB RAM" },
-            "Marvel's Spider-Man Remastered": { appid: "1817070", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4160", gpu: "NVIDIA GeForce GTX 950", ram: "8 GB RAM" },
-            "Marvel's Spider-Man: Miles Morales": { appid: "1817190", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4160", gpu: "NVIDIA GeForce GTX 950", ram: "8 GB RAM" },
-            "Marvel's Spider-Man 2": { appid: "spiderman2", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5x56.png", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
-            "Days Gone": { appid: "1259420", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GeForce GTX 780 / AMD Radeon R9 290", ram: "8 GB RAM" },
-            "Ghost of Tsushima": { appid: "2215430", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-7100 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 5500 XT", ram: "8 GB RAM" },
-            "Death Stranding": { appid: "1190460", os: "Windows 10", cpu: "Intel Core i5-3470 / AMD Ryzen 3 1200", gpu: "GeForce GTX 1050 3GB / AMD Radeon RX 560 4GB", ram: "8 GB RAM" },
-            "Death Stranding 2: On the Beach": { appid: "ds2", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6zjl.png", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
-            "Uncharted: Legacy of Thieves Collection": { appid: "1659420", os: "Windows 10 (64-bit)", cpu: "Intel i5-4330 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 960 / AMD R9 290X", ram: "8 GB RAM" },
-            "Detroit: Become Human": { appid: "1222140", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-3770 / AMD FX-8350", gpu: "Nvidia GeForce GTX 780 / AMD Radeon HD 7950", ram: "8 GB RAM" },
-            "Heavy Rain": { appid: "960910", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "Nvidia GeForce GTX 660 / AMD Radeon HD 7870", ram: "4 GB RAM" },
-            "Beyond: Two Souls": { appid: "960990", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "Nvidia GeForce GTX 660 / AMD Radeon HD 7870", ram: "4 GB RAM" },
-            "Until Dawn": { appid: "2784570", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
-            "The Quarry": { appid: "1577120", os: "Windows 10 (64-bit)", cpu: "FX-8350 / i5-3570", gpu: "GTX 780 / RX 470", ram: "8 GB RAM" },
-            "Tomb Raider (2013)": { appid: "203160", os: "Windows 10", cpu: "Intel Core 2 Duo 1.86 GHz", gpu: "DirectX 9 card with 512MB Video RAM", ram: "1 GB RAM" },
-            "Rise of the Tomb Raider": { appid: "391220", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3220 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 650 / AMD Radeon HD 7770", ram: "6 GB RAM" },
-            "Shadow of the Tomb Raider": { appid: "750920", os: "Windows 10 (64-bit)", cpu: "i3-3220 / AMD FX-6300", gpu: "Nvidia GTX 1050 / AMD Radeon RX 460", ram: "8 GB RAM" },
-            "Assassin's Creed II": { appid: "33230", os: "Windows 10", cpu: "Intel Core 2 Duo 1.8 GHz", gpu: "256 MB DirectX 9.0–compliant", ram: "2 GB RAM" },
-            "Assassin's Creed Brotherhood": { appid: "48190", os: "Windows 10", cpu: "Intel Core 2 Duo 1.8 GHz", gpu: "256 MB DirectX 9.0–compliant", ram: "2 GB RAM" },
-            "Assassin's Creed Revelations": { appid: "201870", os: "Windows 10", cpu: "Intel Core 2 Duo 1.8 GHz", gpu: "512 MB DirectX 9.0–compliant", ram: "2 GB RAM" },
-            "Assassin's Creed III": { appid: "208480", os: "Windows 10", cpu: "2.66 GHz Intel Core 2 Duo", gpu: "512 MB DirectX 9.0c–compliant", ram: "2 GB RAM" },
-            "Assassin's Creed IV: Black Flag": { appid: "242050", os: "Windows 10", cpu: "Intel Core 2 Quad Q8400 2.6 GHz", gpu: "NVIDIA GeForce GTX 260 / AMD Radeon HD 4870", ram: "2 GB RAM" },
-            "Assassin's Creed Unity": { appid: "289650", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K 3.3 GHz", gpu: "NVIDIA GeForce GTX 680 / AMD Radeon HD 7970", ram: "6 GB RAM" },
-            "Assassin's Creed Origins": { appid: "582160", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400s 2.5 GHz / AMD FX-6350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon R9 270", ram: "6 GB RAM" },
-            "Assassin's Creed Odyssey": { appid: "812140", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon R9 270", ram: "8 GB RAM" },
-            "Assassin's Creed Valhalla": { appid: "acvalhalla", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2lfa.png", os: "Windows 10 (64-bit)", cpu: "Intel Ryzen 3 1200 / i5-4460", gpu: "NVIDIA GTX 960 / AMD R9 380", ram: "8 GB RAM" },
-            "Assassin's Creed Mirage": { appid: "acmirage", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co644w.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-4790 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 570", ram: "8 GB RAM" },
-            "Far Cry 3": { appid: "220240", os: "Windows 10", cpu: "2.66 GHz Intel Core 2 Duo", gpu: "512MB Video RAM (DirectX 9.0c)", ram: "4 GB RAM" },
-            "Far Cry 4": { appid: "298110", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-750 2.6 GHz", gpu: "NVIDIA GeForce GTX 460 / AMD Radeon HD 5850", ram: "4 GB RAM" },
-            "Far Cry 5": { appid: "552520", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 670 / AMD Radeon R9 270", ram: "8 GB RAM" },
-            "Far Cry 6": { appid: "farcry6", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2w27.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 960 / AMD RX 460", ram: "8 GB RAM" },
-            "Watch Dogs": { appid: "243470", os: "Windows 10 (64-bit)", cpu: "Intel Core 2 Quad Q8400 2.66 GHz", gpu: "DirectX 11 graphics card with 1 GB Video RAM", ram: "6 GB RAM" },
-            "Watch Dogs 2": { appid: "447040", os: "Windows 10 (64-bit)", cpu: "Intel Core i5 2400S 2.5 GHz", gpu: "NVIDIA GeForce GTX 660", ram: "6 GB RAM" },
-            "Watch Dogs: Legion": { appid: "watchdogslegion", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2lfi.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD Ryzen 5 1400", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 470", ram: "8 GB RAM" },
-            "Prince of Persia: The Lost Crown": { appid: "poplostcrown", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6vw3.png", os: "Windows 10/11", cpu: "Intel Core i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 950 / AMD Radeon RX 5500 XT", ram: "8 GB RAM" },
-            "Avatar: Frontiers of Pandora": { appid: "avatarfop", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5z16.png", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i7-8700K / AMD Ryzen 5 3600", gpu: "NVIDIA GTX 1070 / AMD RX 5700", ram: "16 GB RAM" },
-            "Star Wars Jedi: Fallen Order": { appid: "1172380", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3220 / AMD FX-6100", gpu: "NVIDIA GeForce GTX 650 / AMD Radeon HD 7750", ram: "8 GB RAM" },
-            "Star Wars Jedi: Survivor": { appid: "1774580", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-7700 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 1070 / AMD Radeon RX 5700", ram: "16 GB RAM" },
-            "Star Wars Battlefront II": { appid: "1237950", os: "Windows 10 (64-bit)", cpu: "AMD FX-6350 / Intel Core i5 6600K", gpu: "AMD Radeon HD 7850 / NVIDIA GeForce GTX 660", ram: "8 GB RAM" },
-            "Star Wars: Knights of the Old Republic": { appid: "32370", os: "Windows 10", cpu: "1.0 GHz Intel Pentium III", gpu: "32 MB ATI or NVIDIA graphics card", ram: "256 MB RAM" },
-            "Star Wars Outlaws": { appid: "swoutlaws", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6q54.png", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i7-8700K / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1070 / AMD Radeon RX 5700", ram: "16 GB RAM" },
-            "Middle-earth: Shadow of Mordor": { appid: "241930", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-750 2.67 GHz", gpu: "NVIDIA GeForce GTX 460 / AMD Radeon HD 5850", ram: "4 GB RAM" },
-            "Middle-earth: Shadow of War": { appid: "356190", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K 3.3 GHz", gpu: "NVIDIA GeForce GTX 670 / AMD Radeon HD 7970", ram: "8 GB RAM" },
-            "Batman: Arkham Asylum": { appid: "35140", os: "Windows 10", cpu: "3 GHz Intel Pentium IV", gpu: "NVIDIA GeForce 6600 / ATI Radeon X1300", ram: "1 GB RAM" },
-            "Batman: Arkham City": { appid: "200260", os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA 8800 / ATI 3850", ram: "2 GB RAM" },
-            "Batman: Arkham Knight": { appid: "208650", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-750 2.67 GHz", gpu: "NVIDIA GeForce GTX 660", ram: "6 GB RAM" },
-            "Marvel's Guardians of the Galaxy": { appid: "1088850", os: "Windows 10 (64-bit)", cpu: "AMD Ryzen 5 1400 / Intel Core i5-4460", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 570", ram: "8 GB RAM" },
-            "Marvel Rivals": { appid: "2767030", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600X", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
-            "LEGO Star Wars: The Skywalker Saga": { appid: "920210", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 750 Ti / AMD Radeon HD 7850", ram: "8 GB RAM" },
-            "Doom": { appid: "379720", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 670 / AMD Radeon HD 7870", ram: "8 GB RAM" },
-            "Doom Eternal": { appid: "782330", os: "Windows 10 (64-bit)", cpu: "Intel Core i5 @ 3.3 GHz / AMD Ryzen 3 @ 3.1 GHz", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon R9 280", ram: "8 GB RAM" },
-            "Quake": { appid: "2310", os: "Windows 10", cpu: "Pentium 75 MHz", gpu: "DirectX compatible", ram: "16 MB RAM" },
-            "Wolfenstein: The New Order": { appid: "201810", os: "Windows 10 (64-bit)", cpu: "Intel Core i7", gpu: "GeForce 460 / ATI Radeon HD 6850", ram: "4 GB RAM" },
-            "Wolfenstein II: The New Colossus": { appid: "612880", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-3770 / AMD FX-8350", gpu: "Nvidia GTX 770 4GB / AMD Radeon R9 290 4GB", ram: "8 GB RAM" },
-            "Half-Life": { appid: "70", os: "Windows 10", cpu: "500 MHz", gpu: "16 MB", ram: "96 MB RAM" },
-            "Half-Life 2": { appid: "220", os: "Windows 10", cpu: "1.7 GHz", gpu: "DirectX 8 level", ram: "512 MB RAM" },
-            "Half-Life: Alyx": { appid: "546560", os: "Windows 10", cpu: "Core i5-7500 / Ryzen 5 1600", gpu: "GTX 1060 / RX 580", ram: "12 GB RAM" },
-            "Portal": { appid: "400", os: "Windows 10", cpu: "1.7 GHz", gpu: "DirectX 8.1 level", ram: "512 MB RAM" },
-            "Portal 2": { appid: "620", os: "Windows 10", cpu: "3.0 GHz P4", gpu: "DirectX 9 level with 168 MB VRAM", ram: "2 GB RAM" },
-            "Left 4 Dead": { appid: "500", os: "Windows 10", cpu: "3.0 GHz P4", gpu: "NVIDIA GeForce 6600 / ATI Radeon X1600", ram: "1 GB RAM" },
-            "Left 4 Dead 2": { appid: "550", os: "Windows 10", cpu: "3.0 GHz P4", gpu: "NVIDIA GeForce 6600 / ATI Radeon X1600", ram: "2 GB RAM" },
-            "Team Fortress 2": { appid: "440", os: "Windows 10", cpu: "1.7 GHz", gpu: "DirectX 8.1 level", ram: "512 MB RAM" },
-            "Garry's Mod": { appid: "4000", os: "Windows 10", cpu: "2.5 GHz", gpu: "512MB dedicated", ram: "4 GB RAM" },
-            "Phasmophobia": { appid: "739630", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4590 / AMD Ryzen 5 1500X", gpu: "NVIDIA GTX 970 / AMD Radeon RX 580", ram: "8 GB RAM" },
-            "Lethal Company": { appid: "1966720", os: "Windows 10", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 1050", ram: "4 GB RAM" },
-            "Content Warning": { appid: "2881650", os: "Windows 10 (64-bit)", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 1050", ram: "8 GB RAM" },
-            "Devour": { appid: "1274570", os: "Windows 10 (64-bit)", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 970", ram: "8 GB RAM" },
-            "Dead by Daylight": { appid: "381210", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4170 / AMD FX-8300", gpu: "NVIDIA GeForce GTX 760 / AMD HD 7870", ram: "8 GB RAM" },
-            "Friday the 13th: The Game": { appid: "438740", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3220 / AMD X8 FX-8350", gpu: "GeForce GTX 650 Ti / Radeon HD 7770", ram: "4 GB RAM" },
-            "Hunt: Showdown 1896": { appid: "594650", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4590 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 660 TI / AMD Radeon RX 560", ram: "8 GB RAM" },
-            "Escape from Tarkov": { appid: "eft", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mwt.png", os: "Windows 10 (64-bit)", cpu: "Dual-core 2.4 GHz", gpu: "DX11 compatible with 1 GB VRAM", ram: "8 GB RAM" },
-            "Ready or Not": { appid: "1144200", os: "Windows 10 (64-bit)", cpu: "Intel Core i4-4430 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon R7 370", ram: "8 GB RAM" },
-            "Insurgency: Sandstorm": { appid: "581320", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4570 / AMD FX-8350", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon HD 7970", ram: "8 GB RAM" },
-            "Squad": { appid: "393380", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6300U", gpu: "NVIDIA GeForce GTX 770 / AMD Radeon HD 7870", ram: "8 GB RAM" },
-            "Hell Let Loose": { appid: "686810", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-8100 / AMD Ryzen 3 1300X", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon R9 380", ram: "8 GB RAM" },
-            "Arma 3": { appid: "107410", os: "Windows 10 (64-bit)", cpu: "Intel Dual-Core 2.4 GHz / AMD Dual-Core Athlon 2.5 GHz", gpu: "NVIDIA GeForce 9800GT / AMD Radeon HD 5670", ram: "4 GB RAM" },
-            "Day of Infamy": { appid: "447820", os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "Shader Model 3 compatible", ram: "4 GB RAM" },
-            "Chivalry 2": { appid: "1824220", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-6100 / AMD FX-4350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
-            "Mordhau": { appid: "629760", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4670 / AMD equivalent", gpu: "NVIDIA GTX 680 / AMD equivalent", ram: "8 GB RAM" },
-            "For Honor": { appid: "304390", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-550 / AMD FX-4350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "6 GB RAM" },
-            "War Thunder": { appid: "236390", os: "Windows 10/11", cpu: "2.2 GHz", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "4 GB RAM" },
-            "World of Tanks": { appid: "wot", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mwu.png", os: "Windows 10/11", cpu: "2.2 GHz", gpu: "GeForce 6800 / ATI X1600", ram: "2 GB RAM" },
-            "World of Warships": { appid: "552990", os: "Windows 10/11", cpu: "Core 2 Duo 2.7 GHz", gpu: "GeForce GT 440 / Radeon HD 5570", ram: "4 GB RAM" },
-            "Warframe": { appid: "230410", os: "Windows 10", cpu: "Intel Core i3-2100", gpu: "DirectX 11+ capable", ram: "4 GB RAM" },
-            "Destiny 2": { appid: "1085660", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3250 / AMD FX-4350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "6 GB RAM" },
-            "The Division": { appid: "365590", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6100", gpu: "NVIDIA GeForce GTX 560 / AMD Radeon HD 7770", ram: "6 GB RAM" },
-            "The Division 2": { appid: "thedivision2", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xoz.png", os: "Windows 10 (64-bit)", cpu: "AMD FX-6350 / Intel Core i5-2500K", gpu: "AMD Radeon R9 270 / NVIDIA GeForce GTX 670", ram: "8 GB RAM" },
-            "Borderlands": { appid: "7290", os: "Windows 10", cpu: "2.4 GHz", gpu: "256MB", ram: "1 GB RAM" },
-            "Borderlands 2": { appid: "49520", os: "Windows 10", cpu: "2.4 GHz Dual Core", gpu: "NVIDIA GeForce 8500 / ATI Radeon HD 2600", ram: "2 GB RAM" },
-            "Borderlands 3": { appid: "397540", os: "Windows 10", cpu: "AMD FX-8350 / Intel Core i5-3570", gpu: "AMD Radeon HD 7970 / NVIDIA GeForce GTX 680", ram: "6 GB RAM" },
-            "Tiny Tina's Wonderlands": { appid: "1286680", os: "Windows 10", cpu: "AMD FX-8350 / Intel Core i5-3570", gpu: "AMD Radeon RX 470 / NVIDIA GeForce GTX 1060", ram: "6 GB RAM" },
-            "BioShock": { appid: "7670", os: "Windows 10", cpu: "3 GHz Pentium 4", gpu: "128MB Direct X 9.0c compliant", ram: "2 GB RAM" },
-            "BioShock 2": { appid: "8850", os: "Windows 10", cpu: "3 GHz Pentium 4", gpu: "NVIDIA GeForce 7800 / ATI Radeon X1900", ram: "2 GB RAM" },
-            "BioShock Infinite": { appid: "8870", os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
-            "Dishonored": { appid: "205100", os: "Windows 10", cpu: "3.0 GHz dual core", gpu: "NVIDIA GeForce GTX 460 / ATI Radeon HD 5850", ram: "4 GB RAM" },
-            "Dishonored 2": { appid: "403640", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7970", ram: "8 GB RAM" },
-            "Prey": { appid: "480490", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
-            "Deathloop": { appid: "1252330", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 / AMD RX 580", ram: "12 GB RAM" },
-            "Metro 2033 Redux": { appid: "286690", os: "Windows 10", cpu: "Dual Core 2.2 GHz", gpu: "GeForce 8800 GT / Radeon HD 4670", ram: "2 GB RAM" },
-            "Metro: Last Light Redux": { appid: "287390", os: "Windows 10", cpu: "Dual Core 2.2 GHz", gpu: "GeForce 8800 GT / Radeon HD 4670", ram: "2 GB RAM" },
-            "Metro Exodus": { appid: "412020", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4440", gpu: "GeForce GTX 670 / GeForce GTX 1050", ram: "8 GB RAM" },
-            "S.T.A.L.K.E.R.: Shadow of Chernobyl": { appid: "4500", os: "Windows 10", cpu: "Intel Pentium 4 2.0 GHz", gpu: "DirectX 8.0 compatible", ram: "512 MB RAM" },
-            "S.T.A.L.K.E.R. 2: Heart of Chornobyl": { appid: "1643320", os: "Windows 10/11 (64-bit)", cpu: "AMD Ryzen 5 1600X / Intel Core i5-7600K", gpu: "AMD Radeon RX 580 / NVIDIA GeForce GTX 1060", ram: "16 GB RAM" },
-            "Crysis": { appid: "17300", os: "Windows 10", cpu: "Intel Core 2 Duo 2.8 GHz", gpu: "NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
-            "Crysis 2": { appid: "108800", os: "Windows 10", cpu: "Intel Core 2 Duo 2 GHz", gpu: "NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
-            "Crysis 3": { appid: "1286430", os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA GTS 450 / AMD Radeon HD 5770", ram: "3 GB RAM" },
-            "Titanfall 2": { appid: "1237970", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-6300t", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
-            "DOOM 3": { appid: "9050", os: "Windows 10", cpu: "1.5 GHz", gpu: "64MB DirectX 9b", ram: "384 MB RAM" },
-            "Serious Sam 4": { appid: "257420", os: "Windows 10 (64-bit)", cpu: "4-core CPU @ 2.5 GHz", gpu: "nVidia GeForce 780/970 / AMD Radeon R9 290", ram: "8 GB RAM" },
-            "Dying Light": { appid: "239140", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500 @ 3.3 GHz / AMD FX-8320", gpu: "NVIDIA GeForce GTX 560 / AMD Radeon HD 6870", ram: "4 GB RAM" },
-            "Dying Light 2 Stay Human": { appid: "534380", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-9100 / AMD Ryzen 3 2300X", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 560", ram: "8 GB RAM" },
-            "Dead Island 2": { appid: "deadisland2", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5z16.png", os: "Windows 10 (64-bit)", cpu: "AMD FX-8350 / Intel Core i7-7700HQ", gpu: "Radeon RX 480 / GeForce GTX 1060", ram: "10 GB RAM" },
-            "State of Decay 2": { appid: "495420", os: "Windows 10 (64-bit)", cpu: "AMD FX-6300 / Intel i5-2500 @ 2.7GHz", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon HD 7870", ram: "8 GB RAM" },
-            "A Plague Tale: Innocence": { appid: "752590", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2120 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
-            "A Plague Tale: Requiem": { appid: "1182900", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690K / AMD FX-8300", gpu: "NVIDIA GeForce GTX 970 / AMD Radeon RX 590", ram: "16 GB RAM" },
-            "It Takes Two": { appid: "1426210", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100T / AMD FX-6100", gpu: "Nvidia GeForce GTX 660 / AMD Radeon HD 7750", ram: "8 GB RAM" },
-            "A Way Out": { appid: "1222700", os: "Windows 10 (64-bit)", cpu: "Intel core i3-2100T / AMD FX-6100", gpu: "GeForce GTX 650Ti / Radeon HD 7750", ram: "8 GB RAM" },
-            "Unravel": { appid: "1225560", os: "Windows 10", cpu: "Intel Core 2 Duo @ 2.4GHz", gpu: "NVIDIA GeForce GTX 450 / ATI Radeon HD 5750", ram: "4 GB RAM" },
-            "Unravel Two": { appid: "1225570", os: "Windows 10", cpu: "Intel i3 2120 @ 3.3GHz", gpu: "Intel HD Graphics 4000 / NVIDIA GeForce GT 730", ram: "4 GB RAM" },
-            "Human: Fall Flat": { appid: "477160", os: "Windows 10", cpu: "Intel Core2 Duo Q6600 @ 2.40 GHz", gpu: "GeForce GT 630", ram: "1 GB RAM" },
-            "Gang Beasts": { appid: "560430", os: "Windows 10", cpu: "Core i3", gpu: "Dedicated graphics card", ram: "4 GB RAM" },
-            "Overcooked! 2": { appid: "728880", os: "Windows 10", cpu: "Intel Core i3-2100 / AMD A8-5600K", gpu: "NVIDIA GeForce GTX 630 / AMD Radeon HD 6570", ram: "4 GB RAM" },
-            "Moving Out": { appid: "996770", os: "Windows 10", cpu: "Intel Core i3-540 / AMD Phenom II X4 940", gpu: "Intel HD Graphics 3000 / Radeon HD 5450", ram: "4 GB RAM" },
-            "Sea of Thieves": { appid: "1172620", os: "Windows 10 (64-bit)", cpu: "Intel Q9450 @ 2.66GHz / AMD Phenom II X6", gpu: "Nvidia GeForce GTX 650 / AMD Radeon HD 7750", ram: "4 GB RAM" },
-            "Deep Rock Galactic": { appid: "548430", os: "Windows 10 (64-bit)", cpu: "2.4 GHz Dual Core", gpu: "NVIDIA GeForce GTX 460 / AMD Radeon HD 5770", ram: "6 GB RAM" },
-            "Helldivers 2": { appid: "553850", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-4790K / AMD Ryzen 5 1500X", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 470", ram: "8 GB RAM" },
-            "Warhammer 40,000: Space Marine 2": { appid: "2183900", os: "Windows 10/11 (64-bit)", cpu: "AMD Ryzen 5 2600X / Intel Core i5-8600K", gpu: "6 GB VRAM, AMD Radeon RX 580 / NVIDIA GeForce GTX 1060", ram: "8 GB RAM" },
-            "Paladins": { appid: "444090", os: "Windows 10", cpu: "Core 2 Duo 2.4 GHz", gpu: "Shader Model 3.0+ support", ram: "4 GB RAM" },
-            "Teamfight Tactics": { appid: "tft", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mvt.png", os: "Windows 10/11", cpu: "Intel Core i3-530", gpu: "NVIDIA GeForce 9600GT", ram: "2 GB RAM" },
-            "Hearthstone": { appid: "hearthstone", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1x9v.png", os: "Windows 10", cpu: "Pentium D / Athlon 64 X2", gpu: "Intel HD Graphics", ram: "2 GB RAM" },
-            "Diablo III": { appid: "diablo3", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tnm.png", os: "Windows 10", cpu: "Intel Pentium D / AMD Athlon 64 X2", gpu: "NVIDIA GeForce 7800 GT / ATI Radeon X1950 Pro", ram: "2 GB RAM" },
-            "Diablo IV": { appid: "diablo4", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5w0v.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon R9 280", ram: "8 GB RAM" },
-            "Path of Exile": { appid: "238960", os: "Windows 10", cpu: "Quad core 2.6 GHz", gpu: "NVIDIA GeForce GTX 650 Ti", ram: "8 GB RAM" },
-            "Path of Exile 2": { appid: "2694490", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-7400 / AMD Ryzen 3 2200G", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 470", ram: "8 GB RAM" },
-            "Lost Ark": { appid: "1599340", os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce GTX 460", ram: "8 GB RAM" },
-            "New World": { appid: "1063730", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 670 / AMD Radeon R9 390", ram: "8 GB RAM" },
-            "Black Desert": { appid: "582660", os: "Windows 10", cpu: "Intel Core i3", gpu: "GTS 250 / GeForce 9800 GTX", ram: "4 GB RAM" },
-            "Final Fantasy XIV": { appid: "39210", os: "Windows 10/11", cpu: "Intel Core i5-2400", gpu: "NVIDIA GeForce GTX 750 / AMD Radeon R7 260X", ram: "4 GB RAM" },
-            "Final Fantasy VII Remake Intergrade": { appid: "1462040", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3330 / AMD FX-8350", gpu: "GeForce GTX 780 / Radeon RX 480", ram: "8 GB RAM" },
-            "Final Fantasy VII Rebirth": { appid: "ff7rebirth", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co6q56.png", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i7-8700 / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1080 / AMD Radeon RX 5700 XT", ram: "16 GB RAM" },
-            "Persona 5 Royal": { appid: "1687950", os: "Windows 10 (64-bit)", cpu: "Intel Core i7-4770", gpu: "NVIDIA GeForce GTX 650", ram: "8 GB RAM" },
-            "Persona 3 Reload": { appid: "2161700", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2300 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 650 / AMD Radeon HD 7770", ram: "8 GB RAM" },
-            "Yakuza 0": { appid: "638970", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3470 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7870", ram: "4 GB RAM" },
-            "Like a Dragon: Infinite Wealth": { appid: "2072450", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3470 / AMD FX-8350", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 460", ram: "8 GB RAM" },
-            "NieR:Automata": { appid: "524220", os: "Windows 10 (64-bit)", cpu: "Intel Core i3 2100", gpu: "NVIDIA GeForce GTX 770", ram: "4 GB RAM" },
-            "NieR Replicant": { appid: "1113560", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3250 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon R9 280X", ram: "8 GB RAM" },
-            "Kingdom Hearts III": { appid: "2552430", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-7500 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R9 270X", ram: "4 GB RAM" },
-            "Tekken 8": { appid: "1778820", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 570", ram: "8 GB RAM" },
-            "Street Fighter 6": { appid: "1364780", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-7500 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "8 GB RAM" },
-            "Mortal Kombat 1": { appid: "1971870", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 2600", gpu: "NVIDIA GeForce GTX 980 / AMD Radeon RX 470", ram: "8 GB RAM" },
-            "EA Sports FC 25": { appid: "eafc25", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co7u7v.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 570", ram: "8 GB RAM" },
-            "NBA 2K25": { appid: "nba2k25", customImg: "https://images.igdb.com/igdb/image/upload/t_cover_big/co7z7z.png", os: "Windows 10 (64-bit)", cpu: "Intel Core i3-9100 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 570", ram: "8 GB RAM" },
-            "WWE 2K24": { appid: "2315840", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3550 / AMD FX-8350", gpu: "NVIDIA GeForce GTX 1050 / AMD Radeon RX 560", ram: "8 GB RAM" },
-            "Forza Horizon 5": { appid: "1551360", os: "Windows 10 (64-bit)", cpu: "Intel i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 970 / AMD RX 470", ram: "8 GB RAM" },
-            "Forza Motorsport": { appid: "2440510", os: "Windows 10 (64-bit)", cpu: "Intel i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 / AMD RX 5500 XT", ram: "8 GB RAM" },
-            "Need for Speed Heat": { appid: "1222680", os: "Windows 10 (64-bit)", cpu: "FX-6300 / i5-3570", gpu: "GTX 760 / Radeon 7970", ram: "8 GB RAM" },
-            "Need for Speed Unbound": { appid: "1846380", os: "Windows 10 (64-bit)", cpu: "i5-8600 / Ryzen 5 2600", gpu: "GTX 1050 Ti / RX 570", ram: "8 GB RAM" },
-            "Assetto Corsa": { appid: "244210", os: "Windows 10", cpu: "AMD Athlon X2 2.8 GHZ / Intel Core 2 Duo 2.4 GHZ", gpu: "DirectX 10.1 (AMD Radeon HD 6450 / Nvidia GeForce GT 460)", ram: "2 GB RAM" },
-            "Assetto Corsa Competizione": { appid: "805550", os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-8350", gpu: "GeForce GTX 750 Ti / AMD Radeon HD 7770", ram: "4 GB RAM" },
-            "BeamNG.drive": { appid: "284160", os: "Windows 10/11 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce GTX 550 Ti", ram: "8 GB RAM" },
-            "My Summer Car": { appid: "516750", os: "Windows 10", cpu: "3 GHz dual core", gpu: "GTX 650 / Radeon HD 7750", ram: "4 GB RAM" },
-            "Cities in Motion": { appid: "73010", os: "Windows 10", cpu: "2 GHz Dual Core", gpu: "NVIDIA GeForce 8800", ram: "2 GB RAM" }
+            "Minecraft": { os: "Windows 10/11", cpu: "Intel Core i3-3210 / AMD A8-7600", gpu: "Intel HD Graphics 4000 / AMD Radeon R5", ram: "4 GB RAM" },
+            "Counter-Strike 2": { os: "Windows 10 (64-bit)", cpu: "4 İş Parçacıklı CPU (Intel / AMD)", gpu: "1 GB veya daha fazla, DX11 uyumlu", ram: "8 GB RAM" },
+            "Grand Theft Auto V": { os: "Windows 10 64-bit", cpu: "Intel Core 2 Quad Q6600 / AMD Phenom 9850", gpu: "NVIDIA 9800 GT 1GB / AMD HD 4870", ram: "4 GB RAM" },
+            "Grand Theft Auto IV": { os: "Windows 10 / 11", cpu: "Intel Core 2 Duo 1.8 GHz / AMD Athlon X2 64", gpu: "NVIDIA 7900 / AMD X1900 256MB", ram: "2 GB RAM" },
+            "Red Dead Redemption 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GTX 770 / AMD Radeon R9 280", ram: "8 GB RAM" },
+            "The Witcher 3: Wild Hunt": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-2500K / AMD Phenom II X4", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7870", ram: "6 GB RAM" },
+            "Cyberpunk 2077": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 6GB / AMD RX 580", ram: "12 GB RAM" },
+            "Elden Ring": { os: "Windows 10/11", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GTX 1060 3GB / AMD RX 580", ram: "12 GB RAM" },
+            "Baldur's Gate 3": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690 / AMD FX 8350", gpu: "NVIDIA GTX 970 / AMD RX 480", ram: "8 GB RAM" },
+            "Hogwarts Legacy": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 960 4GB / AMD RX 470", ram: "16 GB RAM" },
+            "Fortnite": { os: "Windows 10/11 (64-bit)", cpu: "Core i3-3225 3.3 GHz", gpu: "Intel HD 4000 / AMD Radeon Vega 8", ram: "8 GB RAM" },
+            "League of Legends": { os: "Windows 10/11", cpu: "Intel Core i3-530 / AMD A8-3870", gpu: "NVIDIA GT 9600 / AMD HD 6570", ram: "2 GB RAM" },
+            "Valorant": { os: "Windows 7/8/10/11 (64-bit)", cpu: "Intel Core i3-4150 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GT 730 / AMD Radeon R7 240", ram: "4 GB RAM" },
+            "Dota 2": { os: "Windows 10/11", cpu: "Dual Core 2.8 GHz", gpu: "NVIDIA GeForce 8600/9600GT / ATI HD2600", ram: "4 GB RAM" },
+            "PUBG: Battlegrounds": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4430 / AMD FX-6300", gpu: "NVIDIA GTX 960 2GB / AMD R7 370", ram: "8 GB RAM" },
+            "Apex Legends": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-6300 / AMD FX-4350", gpu: "NVIDIA GT 640 / AMD HD 7730", ram: "6 GB RAM" },
+            "Overwatch 2": { os: "Windows 10/11", cpu: "Intel Core i3 / AMD Phenom X3 8650", gpu: "NVIDIA GTX 600 / AMD HD 7000", ram: "6 GB RAM" },
+            "Rainbow Six Siege": { os: "Windows 10/11", cpu: "Intel Core i3-560 / AMD FX-4100", gpu: "NVIDIA GTX 460 / AMD HD 7970", ram: "6 GB RAM" },
+            "Call of Duty: Warzone": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4340 / AMD FX-6300", gpu: "NVIDIA GTX 670 / AMD HD 7950", ram: "8 GB RAM" },
+            "Call of Duty: Modern Warfare III": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 960 / AMD RX 470", ram: "8 GB RAM" },
+            "Call of Duty: Black Ops 6": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 960 / AMD RX 470", ram: "12 GB RAM" },
+            "Battlefield 1": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD FX-6350", gpu: "NVIDIA GTX 660 / AMD HD 7850", ram: "8 GB RAM" },
+            "Battlefield V": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-8300H / AMD FX-8350", gpu: "NVIDIA GTX 1050 / AMD RX 560", ram: "8 GB RAM" },
+            "Battlefield 2042": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1050 Ti / AMD RX 560", ram: "8 GB RAM" },
+            "Terraria": { os: "Windows 10/11", cpu: "2.0 GHz", gpu: "128MB Video Memory", ram: "2.5 GB RAM" },
+            "Stardew Valley": { os: "Windows 10", cpu: "2 GHz", gpu: "256 mb video memory", ram: "2 GB RAM" },
+            "Roblox": { os: "Windows 10/11", cpu: "Intel Core i3 / AMD Ryzen 3", gpu: "DirectX 10 compatible", ram: "4 GB RAM" },
+            "Among Us": { os: "Windows 10", cpu: "SSE2 instruction set support", gpu: "Intel HD 4000", ram: "1 GB RAM" },
+            "Fall Guys": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5 / AMD equivalent", gpu: "NVIDIA GTX 660 / AMD HD 7950", ram: "8 GB RAM" },
+            "Rocket League": { os: "Windows 10 (64-bit)", cpu: "2.5 GHz Dual Core", gpu: "NVIDIA GTX 760 / AMD R9 270X", ram: "4 GB RAM" },
+            "Euro Truck Simulator 2": { os: "Windows 7/8/10/11", cpu: "Quad core CPU 2.4 GHz", gpu: "GTS 450-class / Intel HD 4000", ram: "4 GB RAM" },
+            "American Truck Simulator": { os: "Windows 7/8/10/11", cpu: "Quad core CPU 2.4 GHz", gpu: "GTS 450-class / Intel HD 4000", ram: "4 GB RAM" },
+            "The Sims 4": { os: "Windows 10/11", cpu: "1.8 GHz Intel Core 2 Duo", gpu: "128 MB Video RAM (NVIDIA GeForce 6600)", ram: "4 GB RAM" },
+            "Cities: Skylines": { os: "Windows 10 (64-bit)", cpu: "Intel Core 2 Duo, 3.0GHz", gpu: "NVIDIA GeForce GTX 260", ram: "4 GB RAM" },
+            "Cities: Skylines II": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700K / AMD Ryzen 5 2600X", gpu: "NVIDIA GTX 970 / AMD RX 480", ram: "8 GB RAM" },
+            "Civilization VI": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i3 2.5 Ghz / AMD Phenom II", gpu: "NVIDIA GeForce 450 / AMD Radeon 5570", ram: "4 GB RAM" },
+            "Age of Empires II: Definitive Edition": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100 / AMD FX-4100", gpu: "NVIDIA GT 420 / AMD Radeon HD 5570", ram: "4 GB RAM" },
+            "Age of Empires IV": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-6300U / AMD Ryzen 5 2400G", gpu: "Intel HD 520 / AMD Radeon RX Vega 11", ram: "8 GB RAM" },
+            "Crusader Kings III": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2120 / AMD FX-6350", gpu: "NVIDIA GTX 460 / AMD Radeon HD 6850", ram: "6 GB RAM" },
+            "Europa Universalis IV": { os: "Windows 10", cpu: "Intel Pentium IV 2.4 GHz", gpu: "NVIDIA GeForce 8800", ram: "2 GB RAM" },
+            "Hearts of Iron IV": { os: "Windows 10", cpu: "Intel Core 2 Quad Q9400 2.66 GHz", gpu: "NVIDIA GeForce GTX 570", ram: "4 GB RAM" },
+            "Total War: Warhammer III": { os: "Windows 10 (64-bit)", cpu: "Intel i3-4130 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 900 / AMD RX 400", ram: "6 GB RAM" },
+            "Total War: Rome II": { os: "Windows 10", cpu: "2 GHz Intel Dual Core", gpu: "512 MB DirectX 9.0c compatible", ram: "2 GB RAM" },
+            "Mount & Blade II: Bannerlord": { os: "Windows 10 (64-bit)", cpu: "Intel i3-8100 / AMD Ryzen 3 1300X", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "6 GB RAM" },
+            "Mount & Blade: Warband": { os: "Windows 10", cpu: "2.1 GHz", gpu: "Graphics card with 128 MB", ram: "1 GB RAM" },
+            "RimWorld": { os: "Windows 10", cpu: "Core 2 Duo", gpu: "Intel HD Graphics 3000", ram: "4 GB RAM" },
+            "Factorio": { os: "Windows 10/11", cpu: "Dual core 3Ghz+", gpu: "DirectX 10.1 capable", ram: "4 GB RAM" },
+            "Satisfactory": { os: "Windows 10/11 (64-bit)", cpu: "i5-3570 3.4 GHz", gpu: "NVIDIA GTX 770 2GB", ram: "8 GB RAM" },
+            "Valheim": { os: "Windows 10 (64-bit)", cpu: "2.6 GHz Dual Core", gpu: "GeForce GTX 950 / Radeon HD 7970", ram: "8 GB RAM" },
+            "Rust": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-3750 / AMD FX-8350", gpu: "NVIDIA GTX 970 / AMD R9 380", ram: "10 GB RAM" },
+            "DayZ": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4430", gpu: "NVIDIA GeForce GTX 760 / AMD R9 270X", ram: "8 GB RAM" },
+            "ARK: Survival Evolved": { os: "Windows 10", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 670 / AMD Radeon HD 7870", ram: "8 GB RAM" },
+            "ARK: Survival Ascended": { os: "Windows 10/11", cpu: "AMD Ryzen 5 2600X / Intel i7-6800K", gpu: "NVIDIA GTX 1080 / AMD RX 5600 XT", ram: "16 GB RAM" },
+            "Palworld": { os: "Windows 10 (64-bit)", cpu: "i5-3570K 3.4 GHz", gpu: "GeForce GTX 1050", ram: "16 GB RAM" },
+            "Sons of the Forest": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GeForce GTX 1060 3GB / AMD Radeon RX 570", ram: "16 GB RAM" },
+            "The Forest": { os: "Windows 10", cpu: "Intel Dual Core 2.4 GHz", gpu: "NVIDIA GeForce 8800GT", ram: "4 GB RAM" },
+            "Subnautica": { os: "Windows 10 (64-bit)", cpu: "Intel Haswell 2 cores / 4 threads", gpu: "Intel HD 4600", ram: "8 GB RAM" },
+            "Subnautica: Below Zero": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3 / AMD Ryzen 3", gpu: "Intel HD 530", ram: "8 GB RAM" },
+            "Don't Starve": { os: "Windows 10", cpu: "1.7 GHz+", gpu: "Radeon HD 5450 / 256MB", ram: "1 GB RAM" },
+            "Don't Starve Together": { os: "Windows 10", cpu: "1.7 GHz+", gpu: "Radeon HD 5450", ram: "1 GB RAM" },
+            "Project Zomboid": { os: "Windows 10/11", cpu: "2.0 GHz Processor", gpu: "OpenGL 2.1 compatible", ram: "8 GB RAM" },
+            "7 Days to Die": { os: "Windows 10 (64-bit)", cpu: "2.4 GHz Quad Core", gpu: "2 GB dedicated VRAM", ram: "8 GB RAM" },
+            "Raft": { os: "Windows 10 (64-bit)", cpu: "2.6 GHz Dual Core", gpu: "GeForce GTX 500 series", ram: "6 GB RAM" },
+            "Green Hell": { os: "Windows 10 (64-bit)", cpu: "3.2 GHz Dual Core", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7870", ram: "8 GB RAM" },
+            "Grounded": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3225", gpu: "NVIDIA GTX 650 Ti", ram: "4 GB RAM" },
+            "Enshrouded": { os: "Windows 10", cpu: "Intel Core i5-6400 / AMD Ryzen 5 1500X", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
+            "V Rising": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 1500X", gpu: "NVIDIA GeForce GTX 750 Ti", ram: "8 GB RAM" },
+            "Conan Exiles": { os: "Windows 10 (64-bit)", cpu: "Intel Quad Core i5-2300 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 560 / AMD Radeon HD 7770", ram: "6 GB RAM" },
+            "No Man's Sky": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GTX 1060 / AMD RX 470", ram: "8 GB RAM" },
+            "Starbound": { os: "Windows 10", cpu: "Core 2 Duo", gpu: "Capable of supporting OpenGL 2.1+", ram: "2 GB RAM" },
+            "Hades": { os: "Windows 10", cpu: "Dual Core 2.4 GHz", gpu: "1GB VRAM / DirectX 10+", ram: "4 GB RAM" },
+            "Hades II": { os: "Windows 10 (64-bit)", cpu: "Dual Core 2.4 GHz", gpu: "2GB VRAM", ram: "8 GB RAM" },
+            "Hollow Knight": { os: "Windows 10", cpu: "Intel Core 2 Duo E6750", gpu: "NVIDIA GeForce GT 320", ram: "4 GB RAM" },
+            "Hollow Knight: Silksong": { os: "Windows 10", cpu: "Dual Core 2.4 GHz", gpu: "DirectX 10 or 11 compatible", ram: "4 GB RAM" },
+            "Dead Cells": { os: "Windows 10", cpu: "Intel Core i5+", gpu: "Nvidia 450 GTS / Radeon HD 5750", ram: "2 GB RAM" },
+            "Cuphead": { os: "Windows 7/10", cpu: "Intel Core2 Duo E8400, 3.0GHz", gpu: "GeForce 9600 GT / AMD HD 3870", ram: "3 GB RAM" },
+            "Celeste": { os: "Windows 10", cpu: "Intel Core i3M", gpu: "Intel HD 4000", ram: "2 GB RAM" },
+            "Ori and the Blind Forest": { os: "Windows 10", cpu: "Intel Core 2 Duo", gpu: "Nvidia GeForce 9600 GT", ram: "4 GB RAM" },
+            "Ori and the Will of the Wisps": { os: "Windows 10", cpu: "AMD FX-6300 / Intel Core i3-3220", gpu: "AMD Radeon R7 260 / NVIDIA GeForce GTX 950", ram: "8 GB RAM" },
+            "Undertale": { os: "Windows 10", cpu: "2+ GHz", gpu: "512MB", ram: "2 GB RAM" },
+            "Deltarune": { os: "Windows 10", cpu: "2+ GHz", gpu: "512MB", ram: "2 GB RAM" },
+            "Risk of Rain 2": { os: "Windows 10 (64-bit)", cpu: "1.4 GHz Dual Core", gpu: "NVIDIA GeForce GTX 760", ram: "4 GB RAM" },
+            "Vampire Survivors": { os: "Windows 10", cpu: "Intel Pentium Dual Core", gpu: "1GB VRAM", ram: "1 GB RAM" },
+            "Balatro": { os: "Windows 10", cpu: "1.0 GHz", gpu: "OpenGL 2.1 compatible", ram: "1 GB RAM" },
+            "Slay the Spire": { os: "Windows 10", cpu: "2.0 GHz", gpu: "1Gb Video Memory", ram: "2 GB RAM" },
+            "The Binding of Isaac: Rebirth": { os: "Windows 10", cpu: "2.6 GHz", gpu: "DirectX 9 compatible", ram: "2 GB RAM" },
+            "Enter the Gungeon": { os: "Windows 10", cpu: "Intel Core 2 Duo", gpu: "DirectX 9 compatible", ram: "2 GB RAM" },
+            "Brotato": { os: "Windows 10", cpu: "2 GHz", gpu: "1 GB VRAM", ram: "2 GB RAM" },
+            "Dave the Diver": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce GTX 750", ram: "8 GB RAM" },
+            "Disco Elysium": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce 660", ram: "4 GB RAM" },
+            "Divinity: Original Sin 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 550", ram: "4 GB RAM" },
+            "The Elder Scrolls V: Skyrim": { os: "Windows 10/11", cpu: "Quad-core Intel/AMD processor", gpu: "NVIDIA GTX 470 / AMD HD 7870", ram: "8 GB RAM" },
+            "The Elder Scrolls IV: Oblivion": { os: "Windows 10", cpu: "3.0 GHz Intel Pentium 4", gpu: "ATI X800 series / NVIDIA GeForce 6800", ram: "1 GB RAM" },
+            "Fallout 4": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2300 2.8 GHz / AMD Phenom II X4 945", gpu: "NVIDIA GTX 550 Ti 2GB / AMD Radeon HD 7870 2GB", ram: "8 GB RAM" },
+            "Fallout: New Vegas": { os: "Windows 10", cpu: "2.5 GHz Intel Pentium Dual-Core", gpu: "NVIDIA GeForce 6800 / ATI Radeon X1300", ram: "2 GB RAM" },
+            "Fallout 3": { os: "Windows 10", cpu: "2.4 GHz Intel Pentium 4", gpu: "NVIDIA 6800 / ATI X850", ram: "1 GB RAM" },
+            "Starfield": { os: "Windows 10/11", cpu: "AMD Ryzen 5 2600X / Intel Core i7-6800K", gpu: "AMD Radeon RX 5700 / NVIDIA GeForce GTX 1070", ram: "16 GB RAM" },
+            "Dragon Age: Inquisition": { os: "Windows 10 (64-bit)", cpu: "Intel Quad Core 2.0 GHz / AMD Quad Core 2.5 GHz", gpu: "NVIDIA GeForce GTX 480 / AMD Radeon HD 5870", ram: "4 GB RAM" },
+            "Dragon Age: The Veilguard": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GTX 970 / AMD RX 570", ram: "16 GB RAM" },
+            "Mass Effect Legendary Edition": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5 3570 / AMD FX-8350", gpu: "GPU 2GB (GTX 760 / Radeon 7970)", ram: "8 GB RAM" },
+            "Mass Effect 2": { os: "Windows 10", cpu: "1.8 GHz Intel Core 2 Duo", gpu: "256 MB (NVIDIA GeForce 6800 / ATI Radeon X1600)", ram: "1 GB RAM" },
+            "Mass Effect 3": { os: "Windows 10", cpu: "1.8 GHz Intel Core 2 Duo", gpu: "256 MB (NVIDIA 7900 GT / ATI X1900)", ram: "2 GB RAM" },
+            "Dragon's Dogma 2": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5 10600 / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1070 / AMD Radeon RX 5500 XT", ram: "16 GB RAM" },
+            "Dragon's Dogma: Dark Arisen": { os: "Windows 10", cpu: "Intel Core i5 660 CPU", gpu: "NVIDIA GeForce GTX 470", ram: "4 GB RAM" },
+            "Monster Hunter: World": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 3.20GHz / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
+            "Monster Hunter Rise": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4130 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GT 1030 / AMD Radeon RX 550", ram: "8 GB RAM" },
+            "Dark Souls": { os: "Windows 10", cpu: "Intel Core 2 Duo 2.6 GHz", gpu: "ATI Radeon 4850 / NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
+            "Dark Souls II": { os: "Windows 10", cpu: "Intel Core 2 Duo 8500 3.1 GHz", gpu: "NVIDIA GeForce 9600 GT / ATI Radeon HD 5870", ram: "2 GB RAM" },
+            "Dark Souls III": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 750 Ti / AMD Radeon HD 7950", ram: "4 GB RAM" },
+            "Sekiro: Shadows Die Twice": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon HD 7950", ram: "8 GB RAM" },
+            "Lies of P": { os: "Windows 10 (64-bit)", cpu: "AMD Ryzen 3 1200 / Intel Core i3-6300", gpu: "AMD Radeon RX 560 / NVIDIA GeForce GTX 960", ram: "8 GB RAM" },
+            "Nioh": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5 3550", gpu: "NVIDIA GeForce GTX 780", ram: "6 GB RAM" },
+            "Nioh 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5 4460", gpu: "NVIDIA GeForce GTX 970", ram: "6 GB RAM" },
+            "Black Myth: Wukong": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
+            "Devil May Cry 5": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
+            "Resident Evil 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
+            "Resident Evil 3": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
+            "Resident Evil 4": { os: "Windows 10/11 (64-bit)", cpu: "AMD Ryzen 3 1200 / Intel Core i5-7500", gpu: "AMD Radeon RX 560 / NVIDIA GeForce GTX 1050 Ti", ram: "8 GB RAM" },
+            "Resident Evil 7: Biohazard": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
+            "Resident Evil Village": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-7500 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 560", ram: "8 GB RAM" },
+            "Resident Evil 5": { os: "Windows 10", cpu: "Intel Core 2 Quad / AMD Phenom II X4", gpu: "NVIDIA GeForce 9800 / ATI Radeon HD 5570", ram: "4 GB RAM" },
+            "Resident Evil 6": { os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA GeForce 8800 GTS", ram: "2 GB RAM" },
+            "Dead Space": { os: "Windows 10", cpu: "2.8 GHz processor", gpu: "NVIDIA GeForce 6800 / ATI Radeon X1600", ram: "1 GB RAM" },
+            "Dead Space 2": { os: "Windows 10", cpu: "2.8 GHz processor", gpu: "NVIDIA GeForce 6800 / ATI Radeon X1600", ram: "1 GB RAM" },
+            "Dead Space (2023)": { os: "Windows 10 (64-bit)", cpu: "Ryzen 5 2600X / Core i5 8600", gpu: "RX 5700 / GTX 1070", ram: "16 GB RAM" },
+            "Silent Hill 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700K / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1080 / AMD Radeon RX 5700 XT", ram: "16 GB RAM" },
+            "Alan Wake": { os: "Windows 10", cpu: "Intel Core 2 Duo 2 GHz", gpu: "DirectX 9 compatible with 512MB RAM", ram: "2 GB RAM" },
+            "Alan Wake 2": { os: "Windows 10/11 (64-bit)", cpu: "Intel i5-7600K / AMD equivalent", gpu: "GeForce RTX 2060 / Radeon RX 6600", ram: "16 GB RAM" },
+            "Control": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690 / AMD FX 4350", gpu: "NVIDIA GeForce GTX 780 / AMD Radeon R9 280X", ram: "8 GB RAM" },
+            "Quantum Break": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 2.70GHz", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R7 260x", ram: "8 GB RAM" },
+            "The Last of Us Part I": { os: "Windows 10 (64-bit)", cpu: "AMD Ryzen 5 1500X / Intel Core i7-4770K", gpu: "AMD Radeon RX 470 / NVIDIA GeForce GTX 970", ram: "16 GB RAM" },
+            "The Last of Us Part II Remastered": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
+            "God of War": { os: "Windows 10 (64-bit)", cpu: "Intel i5-2500k / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 960 / AMD R9 290X", ram: "8 GB RAM" },
+            "God of War Ragnarök": { os: "Windows 10 (64-bit)", cpu: "Intel i5-4670K / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 1060 / AMD RX 5500 XT", ram: "8 GB RAM" },
+            "Horizon Zero Dawn": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "Nvidia GeForce GTX 780 / AMD Radeon R9 290", ram: "8 GB RAM" },
+            "Horizon Forbidden West": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-8100 / AMD Ryzen 3 1300X", gpu: "NVIDIA GeForce GTX 1650 / AMD Radeon RX 5500 XT", ram: "16 GB RAM" },
+            "Marvel's Spider-Man Remastered": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4160", gpu: "NVIDIA GeForce GTX 950", ram: "8 GB RAM" },
+            "Marvel's Spider-Man: Miles Morales": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4160", gpu: "NVIDIA GeForce GTX 950", ram: "8 GB RAM" },
+            "Marvel's Spider-Man 2": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
+            "Days Gone": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GeForce GTX 780 / AMD Radeon R9 290", ram: "8 GB RAM" },
+            "Ghost of Tsushima": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-7100 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 5500 XT", ram: "8 GB RAM" },
+            "Death Stranding": { os: "Windows 10", cpu: "Intel Core i5-3470 / AMD Ryzen 3 1200", gpu: "GeForce GTX 1050 3GB / AMD Radeon RX 560 4GB", ram: "8 GB RAM" },
+            "Death Stranding 2: On the Beach": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
+            "Uncharted: Legacy of Thieves Collection": { os: "Windows 10 (64-bit)", cpu: "Intel i5-4330 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 960 / AMD R9 290X", ram: "8 GB RAM" },
+            "Detroit: Become Human": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-3770 / AMD FX-8350", gpu: "Nvidia GeForce GTX 780 / AMD Radeon HD 7950", ram: "8 GB RAM" },
+            "Heavy Rain": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "Nvidia GeForce GTX 660 / AMD Radeon HD 7870", ram: "4 GB RAM" },
+            "Beyond: Two Souls": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "Nvidia GeForce GTX 660 / AMD Radeon HD 7870", ram: "4 GB RAM" },
+            "Until Dawn": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
+            "The Quarry": { os: "Windows 10 (64-bit)", cpu: "FX-8350 / i5-3570", gpu: "GTX 780 / RX 470", ram: "8 GB RAM" },
+            "Tomb Raider (2013)": { os: "Windows 10", cpu: "Intel Core 2 Duo 1.86 GHz", gpu: "DirectX 9 card with 512MB Video RAM", ram: "1 GB RAM" },
+            "Rise of the Tomb Raider": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3220 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 650 / AMD Radeon HD 7770", ram: "6 GB RAM" },
+            "Shadow of the Tomb Raider": { os: "Windows 10 (64-bit)", cpu: "i3-3220 / AMD FX-6300", gpu: "Nvidia GTX 1050 / AMD Radeon RX 460", ram: "8 GB RAM" },
+            "Assassin's Creed II": { os: "Windows 10", cpu: "Intel Core 2 Duo 1.8 GHz", gpu: "256 MB DirectX 9.0–compliant", ram: "2 GB RAM" },
+            "Assassin's Creed Brotherhood": { os: "Windows 10", cpu: "Intel Core 2 Duo 1.8 GHz", gpu: "256 MB DirectX 9.0–compliant", ram: "2 GB RAM" },
+            "Assassin's Creed Revelations": { os: "Windows 10", cpu: "Intel Core 2 Duo 1.8 GHz", gpu: "512 MB DirectX 9.0–compliant", ram: "2 GB RAM" },
+            "Assassin's Creed III": { os: "Windows 10", cpu: "2.66 GHz Intel Core 2 Duo", gpu: "512 MB DirectX 9.0c–compliant", ram: "2 GB RAM" },
+            "Assassin's Creed IV: Black Flag": { os: "Windows 10", cpu: "Intel Core 2 Quad Q8400 2.6 GHz", gpu: "NVIDIA GeForce GTX 260 / AMD Radeon HD 4870", ram: "2 GB RAM" },
+            "Assassin's Creed Unity": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K 3.3 GHz", gpu: "NVIDIA GeForce GTX 680 / AMD Radeon HD 7970", ram: "6 GB RAM" },
+            "Assassin's Creed Origins": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400s 2.5 GHz / AMD FX-6350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon R9 270", ram: "6 GB RAM" },
+            "Assassin's Creed Odyssey": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon R9 270", ram: "8 GB RAM" },
+            "Assassin's Creed Valhalla": { os: "Windows 10 (64-bit)", cpu: "Intel Ryzen 3 1200 / i5-4460", gpu: "NVIDIA GTX 960 / AMD R9 380", ram: "8 GB RAM" },
+            "Assassin's Creed Mirage": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-4790 / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 570", ram: "8 GB RAM" },
+            "Far Cry 3": { os: "Windows 10", cpu: "2.66 GHz Intel Core 2 Duo", gpu: "512MB Video RAM (DirectX 9.0c)", ram: "4 GB RAM" },
+            "Far Cry 4": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-750 2.6 GHz", gpu: "NVIDIA GeForce GTX 460 / AMD Radeon HD 5850", ram: "4 GB RAM" },
+            "Far Cry 5": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 670 / AMD Radeon R9 270", ram: "8 GB RAM" },
+            "Far Cry 6": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 960 / AMD RX 460", ram: "8 GB RAM" },
+            "Watch Dogs": { os: "Windows 10 (64-bit)", cpu: "Intel Core 2 Quad Q8400 2.66 GHz", gpu: "DirectX 11 graphics card with 1 GB Video RAM", ram: "6 GB RAM" },
+            "Watch Dogs 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5 2400S 2.5 GHz", gpu: "NVIDIA GeForce GTX 660", ram: "6 GB RAM" },
+            "Watch Dogs: Legion": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD Ryzen 5 1400", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 470", ram: "8 GB RAM" },
+            "Prince of Persia: The Lost Crown": { os: "Windows 10/11", cpu: "Intel Core i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 950 / AMD Radeon RX 5500 XT", ram: "8 GB RAM" },
+            "Avatar: Frontiers of Pandora": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i7-8700K / AMD Ryzen 5 3600", gpu: "NVIDIA GTX 1070 / AMD RX 5700", ram: "16 GB RAM" },
+            "Star Wars Jedi: Fallen Order": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3220 / AMD FX-6100", gpu: "NVIDIA GeForce GTX 650 / AMD Radeon HD 7750", ram: "8 GB RAM" },
+            "Star Wars Jedi: Survivor": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-7700 / AMD Ryzen 5 1400", gpu: "NVIDIA GTX 1070 / AMD Radeon RX 5700", ram: "16 GB RAM" },
+            "Star Wars Battlefront II": { os: "Windows 10 (64-bit)", cpu: "AMD FX-6350 / Intel Core i5 6600K", gpu: "AMD Radeon HD 7850 / NVIDIA GeForce GTX 660", ram: "8 GB RAM" },
+            "Star Wars: Knights of the Old Republic": { os: "Windows 10", cpu: "1.0 GHz Intel Pentium III", gpu: "32 MB ATI or NVIDIA graphics card", ram: "256 MB RAM" },
+            "Star Wars Outlaws": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i7-8700K / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1070 / AMD Radeon RX 5700", ram: "16 GB RAM" },
+            "Middle-earth: Shadow of Mordor": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-750 2.67 GHz", gpu: "NVIDIA GeForce GTX 460 / AMD Radeon HD 5850", ram: "4 GB RAM" },
+            "Middle-earth: Shadow of War": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K 3.3 GHz", gpu: "NVIDIA GeForce GTX 670 / AMD Radeon HD 7970", ram: "8 GB RAM" },
+            "Batman: Arkham Asylum": { os: "Windows 10", cpu: "3 GHz Intel Pentium IV", gpu: "NVIDIA GeForce 6600 / ATI Radeon X1300", ram: "1 GB RAM" },
+            "Batman: Arkham City": { os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA 8800 / ATI 3850", ram: "2 GB RAM" },
+            "Batman: Arkham Knight": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-750 2.67 GHz", gpu: "NVIDIA GeForce GTX 660", ram: "6 GB RAM" },
+            "Marvel's Guardians of the Galaxy": { os: "Windows 10 (64-bit)", cpu: "AMD Ryzen 5 1400 / Intel Core i5-4460", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 570", ram: "8 GB RAM" },
+            "Marvel Rivals": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600X", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "16 GB RAM" },
+            "LEGO Star Wars: The Skywalker Saga": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 750 Ti / AMD Radeon HD 7850", ram: "8 GB RAM" },
+            "Doom": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 670 / AMD Radeon HD 7870", ram: "8 GB RAM" },
+            "Doom Eternal": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5 @ 3.3 GHz / AMD Ryzen 3 @ 3.1 GHz", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon R9 280", ram: "8 GB RAM" },
+            "Quake": { os: "Windows 10", cpu: "Pentium 75 MHz", gpu: "DirectX compatible", ram: "16 MB RAM" },
+            "Wolfenstein: The New Order": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7", gpu: "GeForce 460 / ATI Radeon HD 6850", ram: "4 GB RAM" },
+            "Wolfenstein II: The New Colossus": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-3770 / AMD FX-8350", gpu: "Nvidia GTX 770 4GB / AMD Radeon R9 290 4GB", ram: "8 GB RAM" },
+            "Half-Life": { os: "Windows 10", cpu: "500 MHz", gpu: "16 MB", ram: "96 MB RAM" },
+            "Half-Life 2": { os: "Windows 10", cpu: "1.7 GHz", gpu: "DirectX 8 level", ram: "512 MB RAM" },
+            "Half-Life: Alyx": { os: "Windows 10", cpu: "Core i5-7500 / Ryzen 5 1600", gpu: "GTX 1060 / RX 580", ram: "12 GB RAM" },
+            "Portal": { os: "Windows 10", cpu: "1.7 GHz", gpu: "DirectX 8.1 level", ram: "512 MB RAM" },
+            "Portal 2": { os: "Windows 10", cpu: "3.0 GHz P4", gpu: "DirectX 9 level with 168 MB VRAM", ram: "2 GB RAM" },
+            "Left 4 Dead": { os: "Windows 10", cpu: "3.0 GHz P4", gpu: "NVIDIA GeForce 6600 / ATI Radeon X1600", ram: "1 GB RAM" },
+            "Left 4 Dead 2": { os: "Windows 10", cpu: "3.0 GHz P4", gpu: "NVIDIA GeForce 6600 / ATI Radeon X1600", ram: "2 GB RAM" },
+            "Team Fortress 2": { os: "Windows 10", cpu: "1.7 GHz", gpu: "DirectX 8.1 level", ram: "512 MB RAM" },
+            "Garry's Mod": { os: "Windows 10", cpu: "2.5 GHz", gpu: "512MB dedicated", ram: "4 GB RAM" },
+            "Phasmophobia": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4590 / AMD Ryzen 5 1500X", gpu: "NVIDIA GTX 970 / AMD Radeon RX 580", ram: "8 GB RAM" },
+            "Lethal Company": { os: "Windows 10", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 1050", ram: "4 GB RAM" },
+            "Content Warning": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 1050", ram: "8 GB RAM" },
+            "Devour": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5", gpu: "NVIDIA GeForce GTX 970", ram: "8 GB RAM" },
+            "Dead by Daylight": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-4170 / AMD FX-8300", gpu: "NVIDIA GeForce GTX 760 / AMD HD 7870", ram: "8 GB RAM" },
+            "Friday the 13th: The Game": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3220 / AMD X8 FX-8350", gpu: "GeForce GTX 650 Ti / Radeon HD 7770", ram: "4 GB RAM" },
+            "Hunt: Showdown 1896": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4590 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 660 TI / AMD Radeon RX 560", ram: "8 GB RAM" },
+            "Escape from Tarkov": { os: "Windows 10 (64-bit)", cpu: "Dual-core 2.4 GHz", gpu: "DX11 compatible with 1 GB VRAM", ram: "8 GB RAM" },
+            "Ready or Not": { os: "Windows 10 (64-bit)", cpu: "Intel Core i4-4430 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon R7 370", ram: "8 GB RAM" },
+            "Insurgency: Sandstorm": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4570 / AMD FX-8350", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon HD 7970", ram: "8 GB RAM" },
+            "Squad": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6300U", gpu: "NVIDIA GeForce GTX 770 / AMD Radeon HD 7870", ram: "8 GB RAM" },
+            "Hell Let Loose": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-8100 / AMD Ryzen 3 1300X", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon R9 380", ram: "8 GB RAM" },
+            "Arma 3": { os: "Windows 10 (64-bit)", cpu: "Intel Dual-Core 2.4 GHz / AMD Dual-Core Athlon 2.5 GHz", gpu: "NVIDIA GeForce 9800GT / AMD Radeon HD 5670", ram: "4 GB RAM" },
+            "Day of Infamy": { os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "Shader Model 3 compatible", ram: "4 GB RAM" },
+            "Chivalry 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-6100 / AMD FX-4350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
+            "Mordhau": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4670 / AMD equivalent", gpu: "NVIDIA GTX 680 / AMD equivalent", ram: "8 GB RAM" },
+            "For Honor": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-550 / AMD FX-4350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "6 GB RAM" },
+            "War Thunder": { os: "Windows 10/11", cpu: "2.2 GHz", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "4 GB RAM" },
+            "World of Tanks": { os: "Windows 10/11", cpu: "2.2 GHz", gpu: "GeForce 6800 / ATI X1600", ram: "2 GB RAM" },
+            "World of Warships": { os: "Windows 10/11", cpu: "Core 2 Duo 2.7 GHz", gpu: "GeForce GT 440 / Radeon HD 5570", ram: "4 GB RAM" },
+            "Warframe": { os: "Windows 10", cpu: "Intel Core i3-2100", gpu: "DirectX 11+ capable", ram: "4 GB RAM" },
+            "Destiny 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3250 / AMD FX-4350", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "6 GB RAM" },
+            "The Division": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6100", gpu: "NVIDIA GeForce GTX 560 / AMD Radeon HD 7770", ram: "6 GB RAM" },
+            "The Division 2": { os: "Windows 10 (64-bit)", cpu: "AMD FX-6350 / Intel Core i5-2500K", gpu: "AMD Radeon R9 270 / NVIDIA GeForce GTX 670", ram: "8 GB RAM" },
+            "Borderlands": { os: "Windows 10", cpu: "2.4 GHz", gpu: "256MB", ram: "1 GB RAM" },
+            "Borderlands 2": { os: "Windows 10", cpu: "2.4 GHz Dual Core", gpu: "NVIDIA GeForce 8500 / ATI Radeon HD 2600", ram: "2 GB RAM" },
+            "Borderlands 3": { os: "Windows 10", cpu: "AMD FX-8350 / Intel Core i5-3570", gpu: "AMD Radeon HD 7970 / NVIDIA GeForce GTX 680", ram: "6 GB RAM" },
+            "Tiny Tina's Wonderlands": { os: "Windows 10", cpu: "AMD FX-8350 / Intel Core i5-3570", gpu: "AMD Radeon RX 470 / NVIDIA GeForce GTX 1060", ram: "6 GB RAM" },
+            "BioShock": { os: "Windows 10", cpu: "3 GHz Pentium 4", gpu: "128MB Direct X 9.0c compliant", ram: "2 GB RAM" },
+            "BioShock 2": { os: "Windows 10", cpu: "3 GHz Pentium 4", gpu: "NVIDIA GeForce 7800 / ATI Radeon X1900", ram: "2 GB RAM" },
+            "BioShock Infinite": { os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
+            "Dishonored": { os: "Windows 10", cpu: "3.0 GHz dual core", gpu: "NVIDIA GeForce GTX 460 / ATI Radeon HD 5850", ram: "4 GB RAM" },
+            "Dishonored 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7970", ram: "8 GB RAM" },
+            "Prey": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-8320", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
+            "Deathloop": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 / AMD RX 580", ram: "12 GB RAM" },
+            "Metro 2033 Redux": { os: "Windows 10", cpu: "Dual Core 2.2 GHz", gpu: "GeForce 8800 GT / Radeon HD 4670", ram: "2 GB RAM" },
+            "Metro: Last Light Redux": { os: "Windows 10", cpu: "Dual Core 2.2 GHz", gpu: "GeForce 8800 GT / Radeon HD 4670", ram: "2 GB RAM" },
+            "Metro Exodus": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4440", gpu: "GeForce GTX 670 / GeForce GTX 1050", ram: "8 GB RAM" },
+            "S.T.A.L.K.E.R.: Shadow of Chernobyl": { os: "Windows 10", cpu: "Intel Pentium 4 2.0 GHz", gpu: "DirectX 8.0 compatible", ram: "512 MB RAM" },
+            "S.T.A.L.K.E.R. 2: Heart of Chornobyl": { os: "Windows 10/11 (64-bit)", cpu: "AMD Ryzen 5 1600X / Intel Core i5-7600K", gpu: "AMD Radeon RX 580 / NVIDIA GeForce GTX 1060", ram: "16 GB RAM" },
+            "Crysis": { os: "Windows 10", cpu: "Intel Core 2 Duo 2.8 GHz", gpu: "NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
+            "Crysis 2": { os: "Windows 10", cpu: "Intel Core 2 Duo 2 GHz", gpu: "NVIDIA GeForce 8800 GT", ram: "2 GB RAM" },
+            "Crysis 3": { os: "Windows 10", cpu: "Intel Core 2 Duo 2.4 GHz", gpu: "NVIDIA GTS 450 / AMD Radeon HD 5770", ram: "3 GB RAM" },
+            "Titanfall 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-6300t", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
+            "DOOM 3": { os: "Windows 10", cpu: "1.5 GHz", gpu: "64MB DirectX 9b", ram: "384 MB RAM" },
+            "Serious Sam 4": { os: "Windows 10 (64-bit)", cpu: "4-core CPU @ 2.5 GHz", gpu: "nVidia GeForce 780/970 / AMD Radeon R9 290", ram: "8 GB RAM" },
+            "Dying Light": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500 @ 3.3 GHz / AMD FX-8320", gpu: "NVIDIA GeForce GTX 560 / AMD Radeon HD 6870", ram: "4 GB RAM" },
+            "Dying Light 2 Stay Human": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-9100 / AMD Ryzen 3 2300X", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 560", ram: "8 GB RAM" },
+            "Dead Island 2": { os: "Windows 10 (64-bit)", cpu: "AMD FX-8350 / Intel Core i7-7700HQ", gpu: "Radeon RX 480 / GeForce GTX 1060", ram: "10 GB RAM" },
+            "State of Decay 2": { os: "Windows 10 (64-bit)", cpu: "AMD FX-6300 / Intel i5-2500 @ 2.7GHz", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon HD 7870", ram: "8 GB RAM" },
+            "A Plague Tale: Innocence": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2120 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7850", ram: "8 GB RAM" },
+            "A Plague Tale: Requiem": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690K / AMD FX-8300", gpu: "NVIDIA GeForce GTX 970 / AMD Radeon RX 590", ram: "16 GB RAM" },
+            "It Takes Two": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-2100T / AMD FX-6100", gpu: "Nvidia GeForce GTX 660 / AMD Radeon HD 7750", ram: "8 GB RAM" },
+            "A Way Out": { os: "Windows 10 (64-bit)", cpu: "Intel core i3-2100T / AMD FX-6100", gpu: "GeForce GTX 650Ti / Radeon HD 7750", ram: "8 GB RAM" },
+            "Unravel": { os: "Windows 10", cpu: "Intel Core 2 Duo @ 2.4GHz", gpu: "NVIDIA GeForce GTX 450 / ATI Radeon HD 5750", ram: "4 GB RAM" },
+            "Unravel Two": { os: "Windows 10", cpu: "Intel i3 2120 @ 3.3GHz", gpu: "Intel HD Graphics 4000 / NVIDIA GeForce GT 730", ram: "4 GB RAM" },
+            "Human: Fall Flat": { os: "Windows 10", cpu: "Intel Core2 Duo Q6600 @ 2.40 GHz", gpu: "GeForce GT 630", ram: "1 GB RAM" },
+            "Gang Beasts": { os: "Windows 10", cpu: "Core i3", gpu: "Dedicated graphics card", ram: "4 GB RAM" },
+            "Overcooked! 2": { os: "Windows 10", cpu: "Intel Core i3-2100 / AMD A8-5600K", gpu: "NVIDIA GeForce GTX 630 / AMD Radeon HD 6570", ram: "4 GB RAM" },
+            "Moving Out": { os: "Windows 10", cpu: "Intel Core i3-540 / AMD Phenom II X4 940", gpu: "Intel HD Graphics 3000 / Radeon HD 5450", ram: "4 GB RAM" },
+            "Sea of Thieves": { os: "Windows 10 (64-bit)", cpu: "Intel Q9450 @ 2.66GHz / AMD Phenom II X6", gpu: "Nvidia GeForce GTX 650 / AMD Radeon HD 7750", ram: "4 GB RAM" },
+            "Deep Rock Galactic": { os: "Windows 10 (64-bit)", cpu: "2.4 GHz Dual Core", gpu: "NVIDIA GeForce GTX 460 / AMD Radeon HD 5770", ram: "6 GB RAM" },
+            "Helldivers 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-4790K / AMD Ryzen 5 1500X", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 470", ram: "8 GB RAM" },
+            "Warhammer 40,000: Space Marine 2": { os: "Windows 10/11 (64-bit)", cpu: "AMD Ryzen 5 2600X / Intel Core i5-8600K", gpu: "6 GB VRAM, AMD Radeon RX 580 / NVIDIA GeForce GTX 1060", ram: "8 GB RAM" },
+            "Paladins": { os: "Windows 10", cpu: "Core 2 Duo 2.4 GHz", gpu: "Shader Model 3.0+ support", ram: "4 GB RAM" },
+            "Teamfight Tactics": { os: "Windows 10/11", cpu: "Intel Core i3-530", gpu: "NVIDIA GeForce 9600GT", ram: "2 GB RAM" },
+            "Hearthstone": { os: "Windows 10", cpu: "Pentium D / Athlon 64 X2", gpu: "Intel HD Graphics", ram: "2 GB RAM" },
+            "Diablo III": { os: "Windows 10", cpu: "Intel Pentium D / AMD Athlon 64 X2", gpu: "NVIDIA GeForce 7800 GT / ATI Radeon X1950 Pro", ram: "2 GB RAM" },
+            "Diablo IV": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon R9 280", ram: "8 GB RAM" },
+            "Path of Exile": { os: "Windows 10", cpu: "Quad core 2.6 GHz", gpu: "NVIDIA GeForce GTX 650 Ti", ram: "8 GB RAM" },
+            "Path of Exile 2": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-7400 / AMD Ryzen 3 2200G", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 470", ram: "8 GB RAM" },
+            "Lost Ark": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce GTX 460", ram: "8 GB RAM" },
+            "New World": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2400 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 670 / AMD Radeon R9 390", ram: "8 GB RAM" },
+            "Black Desert": { os: "Windows 10", cpu: "Intel Core i3", gpu: "GTS 250 / GeForce 9800 GTX", ram: "4 GB RAM" },
+            "Final Fantasy XIV": { os: "Windows 10/11", cpu: "Intel Core i5-2400", gpu: "NVIDIA GeForce GTX 750 / AMD Radeon R7 260X", ram: "4 GB RAM" },
+            "Final Fantasy VII Remake Intergrade": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3330 / AMD FX-8350", gpu: "GeForce GTX 780 / Radeon RX 480", ram: "8 GB RAM" },
+            "Final Fantasy VII Rebirth": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i7-8700 / AMD Ryzen 5 3600", gpu: "NVIDIA GeForce GTX 1080 / AMD Radeon RX 5700 XT", ram: "16 GB RAM" },
+            "Persona 5 Royal": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-4770", gpu: "NVIDIA GeForce GTX 650", ram: "8 GB RAM" },
+            "Persona 3 Reload": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2300 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 650 / AMD Radeon HD 7770", ram: "8 GB RAM" },
+            "Yakuza 0": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3470 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 660 / AMD Radeon HD 7870", ram: "4 GB RAM" },
+            "Like a Dragon: Infinite Wealth": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3470 / AMD FX-8350", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 460", ram: "8 GB RAM" },
+            "NieR:Automata": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3 2100", gpu: "NVIDIA GeForce GTX 770", ram: "4 GB RAM" },
+            "NieR Replicant": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-3250 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon R9 280X", ram: "8 GB RAM" },
+            "Kingdom Hearts III": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-7500 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 760 / AMD Radeon R9 270X", ram: "4 GB RAM" },
+            "Tekken 8": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 570", ram: "8 GB RAM" },
+            "Street Fighter 6": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-7500 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 1060 / AMD Radeon RX 580", ram: "8 GB RAM" },
+            "Mortal Kombat 1": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600 / AMD Ryzen 5 2600", gpu: "NVIDIA GeForce GTX 980 / AMD Radeon RX 470", ram: "8 GB RAM" },
+            "EA Sports FC 25": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-6600K / AMD Ryzen 5 1600", gpu: "NVIDIA GeForce GTX 1050 Ti / AMD Radeon RX 570", ram: "8 GB RAM" },
+            "NBA 2K25": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-9100 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GTX 960 / AMD Radeon RX 570", ram: "8 GB RAM" },
+            "WWE 2K24": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-3550 / AMD FX-8350", gpu: "NVIDIA GeForce GTX 1050 / AMD Radeon RX 560", ram: "8 GB RAM" },
+            "Forza Horizon 5": { os: "Windows 10 (64-bit)", cpu: "Intel i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 970 / AMD RX 470", ram: "8 GB RAM" },
+            "Forza Motorsport": { os: "Windows 10 (64-bit)", cpu: "Intel i5-8400 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 / AMD RX 5500 XT", ram: "8 GB RAM" },
+            "Need for Speed Heat": { os: "Windows 10 (64-bit)", cpu: "FX-6300 / i5-3570", gpu: "GTX 760 / Radeon 7970", ram: "8 GB RAM" },
+            "Need for Speed Unbound": { os: "Windows 10 (64-bit)", cpu: "i5-8600 / Ryzen 5 2600", gpu: "GTX 1050 Ti / RX 570", ram: "8 GB RAM" },
+            "Assetto Corsa": { os: "Windows 10", cpu: "AMD Athlon X2 2.8 GHZ / Intel Core 2 Duo 2.4 GHZ", gpu: "DirectX 10.1 (AMD Radeon HD 6450 / Nvidia GeForce GT 460)", ram: "2 GB RAM" },
+            "Assetto Corsa Competizione": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4460 / AMD FX-8350", gpu: "GeForce GTX 750 Ti / AMD Radeon HD 7770", ram: "4 GB RAM" },
+            "BeamNG.drive": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i3", gpu: "NVIDIA GeForce GTX 550 Ti", ram: "8 GB RAM" },
+            "My Summer Car": { os: "Windows 10", cpu: "3 GHz dual core", gpu: "GTX 650 / Radeon HD 7750", ram: "4 GB RAM" },
+            "Cities in Motion": { os: "Windows 10", cpu: "2 GHz Dual Core", gpu: "NVIDIA GeForce 8800", ram: "2 GB RAM" }
         };
 
         const games = Object.keys(gamesDatabase);
@@ -561,27 +568,19 @@
             
             list.forEach(gameName => {
                 const data = gamesDatabase[gameName] || {
-                    appid: "",
-                    customImg: "",
                     os: "Windows 10/11 (64-bit)",
                     cpu: "Intel Core i5 / AMD Ryzen 5",
                     gpu: "NVIDIA GTX 1060 / AMD RX 580",
                     ram: "8 GB / 16 GB RAM"
                 };
 
-                // Steam CDN veya özel görsel linki oluşturma
-                let imgSrc = data.customImg ? data.customImg : `https://cdn.akamai.steamstatic.com/steam/apps/${data.appid}/header.jpg`;
-
                 const card = document.createElement("div");
                 card.className = "game-card";
                 card.innerHTML = `
                     <div>
                         <div class="game-header">
-                            <img src="${imgSrc}" alt="${gameName} Logo" class="game-logo" onerror="this.src='https://images.igdb.com/igdb/image/upload/t_cover_big/co1tnm.png'">
-                            <div>
-                                <h3>${gameName}</h3>
-                                <span class="badge">PC Game</span>
-                            </div>
+                            <h3>${gameName}</h3>
+                            <span class="badge">PC Game</span>
                         </div>
                         <div class="specs-section">
                             <p><strong>OS:</strong> ${data.os}</p>
