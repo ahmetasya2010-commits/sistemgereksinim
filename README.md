@@ -1,1 +1,330 @@
-https://gamevaulsnowy.vercel.app
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVault | Sistem Gereksinimleri</title>
+    
+    <!-- Google Search Console Doğrulama Etiketi -->
+    <meta name="google-site-verification" content="AWFiQpJqw4R1FKeh6VJOaaB--jUKid0qaRHABoFp-Ds" />
+
+    <style>
+        :root {
+            --bg-color: #0b0e14;
+            --card-bg: #131822;
+            --accent-color: #00ff66;
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --border-color: #1f293d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(circle at 50% 0%, #1a2639 0%, var(--bg-color) 70%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(19, 24, 34, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        header {
+            padding: 40px 20px 20px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+        }
+
+        h1 span {
+            color: var(--accent-color);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #searchBox {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px 20px;
+            font-size: 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        #searchBox:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+
+        #gameContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .game-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .game-card h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .specs-section p {
+            margin: 6px 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .specs-section strong {
+            color: #d1d5db;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(0, 255, 102, 0.1);
+            color: var(--accent-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Bilgi Bölümleri (Hakkında, Gizlilik, İletişim) */
+        .info-section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .info-section h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .info-section p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Üst Menü -->
+    <nav>
+        <a href="#home">Oyunlar</a>
+        <a href="#hakkinda">Hakkında</a>
+        <a href="#gizlilik">Gizlilik Politikası</a>
+        <a href="#iletisim">İletişim</a>
+    </nav>
+
+    <!-- Ana Ekran / Oyunlar Bölümü -->
+    <div id="home">
+        <header>
+            <h1>Game<span>Vault</span></h1>
+            <p class="subtitle">Bilgisayarının 300+ oyunu kaldırıp kaldıramayacağını hemen test et.</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchBox" placeholder="Kütüphanede oyun ara (Örn: Valorant, Minecraft)..." onkeyup="filterGames()">
+        </div>
+
+        <div id="gameContainer"></div>
+    </div>
+
+    <!-- Hakkında Bölümü -->
+    <section id="hakkinda" class="info-section">
+        <h2>Hakkımızda</h2>
+        <p>GameVault, oyuncuların popüler oyunlar için ihtiyaç duydukları sistem gereksinimlerini en hızlı, sade ve güncel şekilde bulmalarını sağlamak amacıyla kurulmuştur. Amacımız, oyuncuların donanımlarının bir oyunu açıp açamayacağını saniyeler içinde öğrenmesine yardımcı olmaktır.</p>
+    </section>
+
+    <!-- Gizlilik Politikası Bölümü (AdSense İçin Zorunlu) -->
+    <section id="gizlilik" class="info-section">
+        <h2>Gizlilik Politikası</h2>
+        <p>GameVault olarak gizliliğinize büyük önem veriyoruz. Sitemizde üçüncü taraf reklam sağlayıcıları (Google AdSense gibi) çerezler (cookies) kullanarak ziyaretçilerimize ilgi alanlarına göre reklamlar gösterebilir. Sitemizi kullanarak bu çerez politikasını kabul etmiş sayılırsınız.</p>
+    </section>
+
+    <!-- İletişim Bölümü -->
+    <section id="iletisim" class="info-section">
+        <h2>İletişim</h2>
+        <p>Görüş, öneri veya reklam iş birlikleri için bize şu e-posta adresinden ulaşabilirsiniz:<br><br>
+        <strong>ahmetcolakoglu999@gmail.com</strong></p>
+    </section>
+
+    <footer>
+        &copy; 2026 GameVault - Tüm Hakları Saklıdır.
+    </footer>
+
+    <script>
+        const games = [
+            "Minecraft", "Counter-Strike 2", "Grand Theft Auto V", "Grand Theft Auto IV", "Red Dead Redemption 2",
+            "The Witcher 3: Wild Hunt", "Cyberpunk 2077", "Elden Ring", "Baldur's Gate 3", "Hogwarts Legacy",
+            "Fortnite", "League of Legends", "Valorant", "Dota 2", "PUBG: Battlegrounds", "Apex Legends",
+            "Overwatch 2", "Rainbow Six Siege", "Call of Duty: Warzone", "Call of Duty: Modern Warfare III",
+            "Call of Duty: Black Ops 6", "Battlefield 1", "Battlefield V", "Battlefield 2042", "Terraria",
+            "Stardew Valley", "Roblox", "Among Us", "Fall Guys", "Rocket League", "Euro Truck Simulator 2",
+            "American Truck Simulator", "The Sims 4", "Cities: Skylines", "Cities: Skylines II", "Civilization VI",
+            "Age of Empires II: Definitive Edition", "Age of Empires IV", "Crusader Kings III", "Europa Universalis IV",
+            "Hearts of Iron IV", "Total War: Warhammer III", "Total War: Rome II", "Mount & Blade II: Bannerlord",
+            "Mount & Blade: Warband", "RimWorld", "Factorio", "Satisfactory", "Valheim", "Rust", "DayZ",
+            "ARK: Survival Evolved", "ARK: Survival Ascended", "Palworld", "Sons of the Forest", "The Forest",
+            "Subnautica", "Subnautica: Below Zero", "Don't Starve", "Don't Starve Together", "Project Zomboid",
+            "7 Days to Die", "Raft", "Green Hell", "Grounded", "Enshrouded", "V Rising", "Conan Exiles",
+            "No Man's Sky", "Starbound", "Hades", "Hades II", "Hollow Knight", "Hollow Knight: Silksong",
+            "Dead Cells", "Cuphead", "Celeste", "Ori and the Blind Forest", "Ori and the Will of the Wisps",
+            "Undertale", "Deltarune", "Risk of Rain 2", "Vampire Survivors", "Balatro", "Slay the Spire",
+            "The Binding of Isaac: Rebirth", "Enter the Gungeon", "Brotato", "Dave the Diver", "Disco Elysium",
+            "Divinity: Original Sin 2", "The Elder Scrolls V: Skyrim", "The Elder Scrolls IV: Oblivion", "Fallout 4",
+            "Fallout: New Vegas", "Fallout 3", "Starfield", "Dragon Age: Inquisition", "Dragon Age: The Veilguard",
+            "Mass Effect Legendary Edition", "Mass Effect 2", "Mass Effect 3", "Dragon's Dogma 2", "Dragon's Dogma: Dark Arisen",
+            "Monster Hunter: World", "Monster Hunter Rise", "Dark Souls", "Dark Souls II", "Dark Souls III",
+            "Sekiro: Shadows Die Twice", "Lies of P", "Nioh", "Nioh 2", "Black Myth: Wukong", "Devil May Cry 5",
+            "Resident Evil 2", "Resident Evil 3", "Resident Evil 4", "Resident Evil 7: Biohazard", "Resident Evil Village",
+            "Resident Evil 5", "Resident Evil 6", "Dead Space", "Dead Space 2", "Dead Space (2023)", "Silent Hill 2",
+            "Alan Wake", "Alan Wake 2", "Control", "Quantum Break", "The Last of Us Part I", "The Last of Us Part II Remastered",
+            "God of War", "God of War Ragnarök", "Horizon Zero Dawn", "Horizon Forbidden West", "Marvel's Spider-Man Remastered",
+            "Marvel's Spider-Man: Miles Morales", "Marvel's Spider-Man 2", "Days Gone", "Ghost of Tsushima", "Death Stranding",
+            "Death Stranding 2: On the Beach", "Uncharted: Legacy of Thieves Collection", "Detroit: Become Human", "Heavy Rain",
+            "Beyond: Two Souls", "Until Dawn", "The Quarry", "Tomb Raider (2013)", "Rise of the Tomb Raider",
+            "Shadow of the Tomb Raider", "Assassin's Creed II", "Assassin's Creed Brotherhood", "Assassin's Creed Revelations",
+            "Assassin's Creed III", "Assassin's Creed IV: Black Flag", "Assassin's Creed Unity", "Assassin's Creed Origins",
+            "Assassin's Creed Odyssey", "Assassin's Creed Valhalla", "Assassin's Creed Mirage", "Far Cry 3", "Far Cry 4",
+            "Far Cry 5", "Far Cry 6", "Watch Dogs", "Watch Dogs 2", "Watch Dogs: Legion", "Prince of Persia: The Lost Crown",
+            "Avatar: Frontiers of Pandora", "Star Wars Jedi: Fallen Order", "Star Wars Jedi: Survivor", "Star Wars Battlefront II",
+            "Star Wars: Knights of the Old Republic", "Star Wars Outlaws", "Middle-earth: Shadow of Mordor", "Middle-earth: Shadow of War",
+            "Batman: Arkham Asylum", "Batman: Arkham City", "Batman: Arkham Knight", "Marvel's Guardians of the Galaxy",
+            "Marvel Rivals", "LEGO Star Wars: The Skywalker Saga", "Doom", "Doom Eternal", "Quake", "Wolfenstein: The New Order",
+            "Wolfenstein II: The New Colossus", "Half-Life", "Half-Life 2", "Half-Life: Alyx", "Portal", "Portal 2",
+            "Left 4 Dead", "Left 4 Dead 2", "Team Fortress 2", "Garry's Mod", "Phasmophobia", "Lethal Company",
+            "Content Warning", "Devour", "Dead by Daylight", "Friday the 13th: The Game", "Hunt: Showdown 1896",
+            "Escape from Tarkov", "Ready or Not", "Insurgency: Sandstorm", "Squad", "Hell Let Loose", "Arma 3",
+            "Day of Infamy", "Chivalry 2", "Mordhau", "For Honor", "War Thunder", "World of Tanks", "World of Warships",
+            "Warframe", "Destiny 2", "The Division", "The Division 2", "Borderlands", "Borderlands 2", "Borderlands 3",
+            "Tiny Tina's Wonderlands", "BioShock", "BioShock 2", "BioShock Infinite", "Dishonored", "Dishonored 2",
+            "Prey", "Deathloop", "Metro 2033 Redux", "Metro: Last Light Redux", "Metro Exodus", "S.T.A.L.K.E.R.: Shadow of Chernobyl",
+            "S.T.A.L.K.E.R. 2: Heart of Chornobyl", "Crysis", "Crysis 2", "Crysis 3", "Titanfall 2", "DOOM 3", "Serious Sam 4",
+            "Dying Light", "Dying Light 2 Stay Human", "Dead Island 2", "State of Decay 2", "A Plague Tale: Innocence",
+            "A Plague Tale: Requiem", "It Takes Two", "A Way Out", "Unravel", "Unravel Two", "Human: Fall Flat",
+            "Gang Beasts", "Overcooked! 2", "Moving Out", "Sea of Thieves", "Deep Rock Galactic", "Helldivers 2",
+            "Warhammer 40,000: Space Marine 2", "Paladins", "Teamfight Tactics", "Hearthstone", "Diablo III", "Diablo IV",
+            "Path of Exile", "Path of Exile 2", "Lost Ark", "New World", "Black Desert", "Final Fantasy XIV",
+            "Final Fantasy VII Remake Intergrade", "Final Fantasy VII Rebirth", "Persona 5 Royal", "Persona 3 Reload",
+            "Yakuza 0", "Like a Dragon: Infinite Wealth", "NieR:Automata", "NieR Replicant", "Kingdom Hearts III",
+            "Tekken 8", "Street Fighter 6", "Mortal Kombat 1", "EA Sports FC 25", "NBA 2K25", "WWE 2K24", "Forza Horizon 5",
+            "Forza Motorsport", "Need for Speed Heat", "Need for Speed Unbound", "Assetto Corsa", "Assetto Corsa Competizione",
+            "BeamNG.drive", "My Summer Car", "Cities in Motion"
+        ];
+
+        function displayGames(list) {
+            const container = document.getElementById("gameContainer");
+            container.innerHTML = "";
+            
+            list.forEach(game => {
+                const card = document.createElement("div");
+                card.className = "game-card";
+                card.innerHTML = `
+                    <span class="badge">PC Game</span>
+                    <h3>${game}</h3>
+                    <div class="specs-section">
+                        <p><strong>OS:</strong> Windows 10/11 (64-bit)</p>
+                        <p><strong>CPU:</strong> Intel Core i5 / AMD Ryzen 5</p>
+                        <p><strong>GPU:</strong> NVIDIA GTX 1060 / AMD RX 580</p>
+                        <p><strong>RAM:</strong> 8 GB / 16 GB</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterGames() {
+            const query = document.getElementById("searchBox").value.toLowerCase();
+            const filtered = games.filter(game => game.toLowerCase().includes(query));
+            displayGames(filtered);
+        }
+
+        displayGames(games);
+    </script>
+</body>
+</html>
