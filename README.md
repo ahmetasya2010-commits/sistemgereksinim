@@ -1,1 +1,1 @@
-https://gamevaulsnowy.vercel.app/
+https://gamevaulsnowy.vercel.app
