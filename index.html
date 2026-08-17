@@ -232,12 +232,12 @@
     </footer>
 
     <script>
-        // Özel gereksinimleri olan popüler oyunlar
+        // Orijinal ve gerçek sistem gereksinimleri (Önemli oyunlar için)
         const customSpecs = {
             "Valorant": { os: "Windows 7/8/10/11 (64-bit)", cpu: "Intel Core i3-4150 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GT 730 / AMD Radeon R7 240", ram: "4 GB RAM" },
             "Minecraft": { os: "Windows 10/11", cpu: "Intel Core i3-3210 / AMD A8-7600", gpu: "Intel HD Graphics 4000 / AMD Radeon R5", ram: "4 GB RAM" },
-            "Grand Theft Auto V": { os: "Windows 10 64-bit", cpu: "Intel Core 2 Quad Q6600 / AMD Phenom 9850", gpu: "NVIDIA 9800 GT 1GB / AMD HD 4870 1GB", ram: "4 GB RAM" },
-            "Counter-Strike 2": { os: "Windows 10 (64-bit)", cpu: "4 İş Parçacıklı CPU (Intel / AMD)", gpu: "1 GB veya daha fazla, DX11", ram: "8 GB RAM" },
+            "Grand Theft Auto V": { os: "Windows 10 64-bit", cpu: "Intel Core 2 Quad Q6600 / AMD Phenom 9850", gpu: "NVIDIA 9800 GT 1GB / AMD HD 4870", ram: "4 GB RAM" },
+            "Counter-Strike 2": { os: "Windows 10 (64-bit)", cpu: "4 İş Parçacıklı CPU (Intel / AMD)", gpu: "1 GB veya daha fazla, DX11 uyumlu", ram: "8 GB RAM" },
             "Cyberpunk 2077": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 6GB / AMD RX 580", ram: "12 GB RAM" },
             "Red Dead Redemption 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GTX 770 / AMD Radeon R9 280", ram: "8 GB RAM" },
             "The Witcher 3: Wild Hunt": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-2500K / AMD Phenom II X4", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7870", ram: "6 GB RAM" },
@@ -245,7 +245,10 @@
             "League of Legends": { os: "Windows 10/11", cpu: "Intel Core i3-530 / AMD A8-3870", gpu: "NVIDIA GT 9600 / AMD HD 6570", ram: "2 GB RAM" },
             "Elden Ring": { os: "Windows 10/11", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GTX 1060 3GB / AMD RX 580", ram: "12 GB RAM" },
             "Baldur's Gate 3": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690 / AMD FX 8350", gpu: "NVIDIA GTX 970 / AMD RX 480", ram: "8 GB RAM" },
-            "Forza Horizon 5": { os: "Windows 10 (64-bit)", cpu: "Intel i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 970 / AMD RX 470", ram: "8 GB RAM" }
+            "Forza Horizon 5": { os: "Windows 10 (64-bit)", cpu: "Intel i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 970 / AMD RX 470", ram: "8 GB RAM" },
+            "Apex Legends": { os: "Windows 10 (64-bit)", cpu: "Intel Core i3-6300 / AMD FX-4350", gpu: "NVIDIA GeForce GT 640 / AMD Radeon HD 7730", ram: "6 GB RAM" },
+            "PUBG: Battlegrounds": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4430 / AMD FX-6300", gpu: "NVIDIA GeForce GTX 960 2GB / AMD Radeon R7 370", ram: "8 GB RAM" },
+            "Dota 2": { os: "Windows 10/11", cpu: "Dual Core 2.8 GHz", gpu: "NVIDIA GeForce 8600/9600GT / ATI/AMD Radeon HD2600/3600", ram: "4 GB RAM" }
         };
 
         // 300+ oyunun tam listesi
@@ -313,7 +316,6 @@
             container.innerHTML = "";
             
             list.forEach(gameName => {
-                // Eğer oyunun özel gereksinimi varsa onu kullan, yoksa standart varsayılan değerleri yaz
                 const specs = customSpecs[gameName] || {
                     os: "Windows 10/11 (64-bit)",
                     cpu: "Intel Core i5 / AMD Ryzen 5",
