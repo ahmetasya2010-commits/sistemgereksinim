@@ -158,7 +158,6 @@
             text-transform: uppercase;
         }
 
-        /* Bilgi Bölümleri (Hakkında, Gizlilik, İletişim) */
         .info-section {
             max-width: 900px;
             margin: 50px auto;
@@ -192,7 +191,6 @@
 </head>
 <body>
 
-    <!-- Üst Menü -->
     <nav>
         <a href="#home">Oyunlar</a>
         <a href="#hakkinda">Hakkında</a>
@@ -200,7 +198,6 @@
         <a href="#iletisim">İletişim</a>
     </nav>
 
-    <!-- Ana Ekran / Oyunlar Bölümü -->
     <div id="home">
         <header>
             <h1>Game<span>Vault</span></h1>
@@ -214,22 +211,19 @@
         <div id="gameContainer"></div>
     </div>
 
-    <!-- Hakkında Bölümü -->
     <section id="hakkinda" class="info-section">
         <h2>Hakkımızda</h2>
-        <p>GameVault, oyuncuların popüler oyunlar için ihtiyaç duydukları sistem gereksinimlerini en hızlı, sade ve güncel şekilde bulmalarını sağlamak amacıyla kurulmuştur. Amacımız, oyuncuların donanımlarının bir oyunu açıp açamayacağını saniyeler içinde öğrenmesine yardımcı olmaktır.</p>
+        <p>GameVault, oyuncuların popüler oyunlar için ihtiyaç duydukları sistem gereksinimlerini en hızlı, sade ve güncel şekilde bulmalarını sağlamak amacıyla kurulmuştur.</p>
     </section>
 
-    <!-- Gizlilik Politikası Bölümü (AdSense İçin Zorunlu) -->
     <section id="gizlilik" class="info-section">
         <h2>Gizlilik Politikası</h2>
-        <p>GameVault olarak gizliliğinize büyük önem veriyoruz. Sitemizde üçüncü taraf reklam sağlayıcıları (Google AdSense gibi) çerezler (cookies) kullanarak ziyaretçilerimize ilgi alanlarına göre reklamlar gösterebilir. Sitemizi kullanarak bu çerez politikasını kabul etmiş sayılırsınız.</p>
+        <p>GameVault olarak gizliliğinize büyük önem veriyoruz. Sitemizde üçüncü taraf reklam sağlayıcıları (Google AdSense gibi) çerezler kullanabilir.</p>
     </section>
 
-    <!-- İletişim Bölümü -->
     <section id="iletisim" class="info-section">
         <h2>İletişim</h2>
-        <p>Görüş, öneri veya reklam iş birlikleri için bize şu e-posta adresinden ulaşabilirsiniz:<br><br>
+        <p>Görüş, öneri veya reklam iş birlikleri için bize ulaşın:<br><br>
         <strong>ahmetcolakoglu999@gmail.com</strong></p>
     </section>
 
@@ -238,6 +232,23 @@
     </footer>
 
     <script>
+        // Özel gereksinimleri olan popüler oyunlar
+        const customSpecs = {
+            "Valorant": { os: "Windows 7/8/10/11 (64-bit)", cpu: "Intel Core i3-4150 / AMD Ryzen 3 1200", gpu: "NVIDIA GeForce GT 730 / AMD Radeon R7 240", ram: "4 GB RAM" },
+            "Minecraft": { os: "Windows 10/11", cpu: "Intel Core i3-3210 / AMD A8-7600", gpu: "Intel HD Graphics 4000 / AMD Radeon R5", ram: "4 GB RAM" },
+            "Grand Theft Auto V": { os: "Windows 10 64-bit", cpu: "Intel Core 2 Quad Q6600 / AMD Phenom 9850", gpu: "NVIDIA 9800 GT 1GB / AMD HD 4870 1GB", ram: "4 GB RAM" },
+            "Counter-Strike 2": { os: "Windows 10 (64-bit)", cpu: "4 İş Parçacıklı CPU (Intel / AMD)", gpu: "1 GB veya daha fazla, DX11", ram: "8 GB RAM" },
+            "Cyberpunk 2077": { os: "Windows 10 (64-bit)", cpu: "Intel Core i7-6700 / AMD Ryzen 5 1600", gpu: "NVIDIA GTX 1060 6GB / AMD RX 580", ram: "12 GB RAM" },
+            "Red Dead Redemption 2": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-2500K / AMD FX-6300", gpu: "NVIDIA GTX 770 / AMD Radeon R9 280", ram: "8 GB RAM" },
+            "The Witcher 3: Wild Hunt": { os: "Windows 10/11 (64-bit)", cpu: "Intel Core i5-2500K / AMD Phenom II X4", gpu: "NVIDIA GTX 660 / AMD Radeon HD 7870", ram: "6 GB RAM" },
+            "Fortnite": { os: "Windows 10/11 (64-bit)", cpu: "Core i3-3225 3.3 GHz", gpu: "Intel HD 4000 / AMD Radeon Vega 8", ram: "8 GB RAM" },
+            "League of Legends": { os: "Windows 10/11", cpu: "Intel Core i3-530 / AMD A8-3870", gpu: "NVIDIA GT 9600 / AMD HD 6570", ram: "2 GB RAM" },
+            "Elden Ring": { os: "Windows 10/11", cpu: "Intel Core i5-8400 / AMD Ryzen 3 3300X", gpu: "NVIDIA GTX 1060 3GB / AMD RX 580", ram: "12 GB RAM" },
+            "Baldur's Gate 3": { os: "Windows 10 (64-bit)", cpu: "Intel Core i5-4690 / AMD FX 8350", gpu: "NVIDIA GTX 970 / AMD RX 480", ram: "8 GB RAM" },
+            "Forza Horizon 5": { os: "Windows 10 (64-bit)", cpu: "Intel i5-4460 / AMD Ryzen 3 1200", gpu: "NVIDIA GTX 970 / AMD RX 470", ram: "8 GB RAM" }
+        };
+
+        // 300+ oyunun tam listesi
         const games = [
             "Minecraft", "Counter-Strike 2", "Grand Theft Auto V", "Grand Theft Auto IV", "Red Dead Redemption 2",
             "The Witcher 3: Wild Hunt", "Cyberpunk 2077", "Elden Ring", "Baldur's Gate 3", "Hogwarts Legacy",
@@ -301,17 +312,25 @@
             const container = document.getElementById("gameContainer");
             container.innerHTML = "";
             
-            list.forEach(game => {
+            list.forEach(gameName => {
+                // Eğer oyunun özel gereksinimi varsa onu kullan, yoksa standart varsayılan değerleri yaz
+                const specs = customSpecs[gameName] || {
+                    os: "Windows 10/11 (64-bit)",
+                    cpu: "Intel Core i5 / AMD Ryzen 5",
+                    gpu: "NVIDIA GTX 1060 / AMD RX 580",
+                    ram: "8 GB / 16 GB RAM"
+                };
+
                 const card = document.createElement("div");
                 card.className = "game-card";
                 card.innerHTML = `
                     <span class="badge">PC Game</span>
-                    <h3>${game}</h3>
+                    <h3>${gameName}</h3>
                     <div class="specs-section">
-                        <p><strong>OS:</strong> Windows 10/11 (64-bit)</p>
-                        <p><strong>CPU:</strong> Intel Core i5 / AMD Ryzen 5</p>
-                        <p><strong>GPU:</strong> NVIDIA GTX 1060 / AMD RX 580</p>
-                        <p><strong>RAM:</strong> 8 GB / 16 GB</p>
+                        <p><strong>OS:</strong> ${specs.os}</p>
+                        <p><strong>CPU:</strong> ${specs.cpu}</p>
+                        <p><strong>GPU:</strong> ${specs.gpu}</p>
+                        <p><strong>RAM:</strong> ${specs.ram}</p>
                     </div>
                 `;
                 container.appendChild(card);
